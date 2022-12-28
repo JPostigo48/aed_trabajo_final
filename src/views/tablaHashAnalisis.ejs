@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Análisis de complejidad computacional</h3></center>
+            <br>
+            <p>La complejidad computacional de las operaciones en una tabla hash depende del tamaño de la tabla y de la eficiencia de la función de dispersión utilizada. En general, se espera que las operaciones de inserción, eliminación y búsqueda en una tabla hash tengan una complejidad de tiempo O(1) en promedio.</p>
+            <br>
+            <p>Esto significa que, en promedio, estas operaciones tardarán el mismo tiempo independientemente del número de elementos almacenados en la tabla. Esto se debe a que las tablas hash utilizan una función de dispersión para mapear los elementos a una posición en la tabla, lo que permite acceder a los elementos de forma rápida sin tener que buscar en toda la tabla.</p>
+            <br>
+            <p>Sin embargo, es importante tener en cuenta que la complejidad de tiempo O(1) en promedio no se garantiza en todos los casos. Si la tabla hash está muy llena o si la función de dispersión es ineficiente, puede haber una tasa de colisiones alta, lo que puede hacer que las operaciones de inserción, eliminación y búsqueda sean más lentas. En este caso, la complejidad de tiempo puede ser peor que O(1) en promedio.</p>
+            <br>
+            <br>
+            <p>Link de apoyo</p>
+            <br>
+            <li><a href="https://www.geeksforgeeks.org/what-is-hashing/">What is Hashing?</a></li>
+            <li><a href="https://www.tutorialspoint.com/data_structures_algorithms/hash_data_structure.htm">Estructura de datos y Algoritmos - Tablas HASH</a></li>            
+            <li><a href="https://cplusplus.com/reference/unordered_map/unordered_map/">Libreria c++ : unordered_map</a></li>
+            <li><a href="https://oa.upm.es/70016/1/TFG_DANIEL_GARCIA_GARCIA.pdf">Universidad Politécnica de Madrid - Implementación Alternativa de una Tabla Hash en C++</a></li>
+        </div>
+    </section>
+</body>
+</html>

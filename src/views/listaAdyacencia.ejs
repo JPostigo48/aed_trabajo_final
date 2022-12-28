@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Lista de Adyacencia</h3></center>
+            <br>
+            <p>Una lista de adyacencia es una estructura de datos utilizada para representar un grafo en una computadora. Un grafo es un conjunto de vértices (también conocidos como nodos) y arcos (también conocidos como aristas) que conectan a los vértices entre sí.</p>
+            <br>
+            <p>La lista de adyacencia es una forma de representar un grafo en una computadora utilizando una lista enlazada para cada vértice del grafo. Cada nodo de la lista enlazada contiene información sobre un vértice adyacente al vértice original. Por ejemplo, si tenemos un grafo con tres vértices A, B y C, y dos arcos que conectan A con B y B con C, podríamos representarlo utilizando una lista de adyacencia de la siguiente manera:</p>
+            <br>
+            <pre>
+                A: [B]
+                B: [A, C]
+                C: [B]
+            </pre>
+            <br>
+            <p>En esta representación, la lista enlazada para cada vértice contiene los vértices adyacentes a ese vértice en particular. Así, por ejemplo, la lista enlazada para el vértice A contiene solo el vértice B, ya que hay un arco que conecta a A con B. La lista enlazada para el vértice B, por otro lado, contiene tanto a A como a C, ya que hay arcos que conectan a B con ambos vértices.</p>
+            <br>
+            <p>Una de las ventajas de la lista de adyacencia es que es fácil de implementar y es adecuada para grafos que tienen un número variable de vértices y arcos. Sin embargo, una desventaja es que puede ser menos eficiente que otras estructuras de datos para algunas operaciones, como encontrar todos los vértices adyacentes a un vértice determinado.</p>
+            <br>
+            <p>A continuacion el codigo para c++:</p>
+            <br>
+            <pre>
+                #include <iostream>
+                #include <vector>
+                #include <unordered_map>
+
+                using namespace std;
+
+                // Una estructura para representar un vértice en el grafo
+                struct Vertex {
+                    int data;
+                };
+
+                // Una estructura para representar un arco en el grafo
+                struct Edge {
+                    Vertex* source;
+                    Vertex* dest;
+                    int weight;
+                };
+
+                // Una clase para representar un grafo utilizando una lista de adyacencia
+                class Graph {
+                public:
+                // Un mapa para almacenar todos los vértices del grafo
+                unordered_map<Vertex*, vector<Edge*>> adj_list;
+
+                // Agrega un nuevo vértice al grafo
+                void add_vertex(Vertex* v) {
+                    adj_list[v] = vector<Edge*>();
+                }
+
+                // Agrega un nuevo arco al grafo
+                void add_edge(Edge* e) {
+                    adj_list[e->source].push_back(e);
+                }
+                };
+
+                int main() {
+                // Creamos algunos vértices
+                Vertex* v1 = new Vertex{1};
+                Vertex* v2 = new Vertex{2};
+                Vertex* v3 = new Vertex{3};
+
+                // Creamos algunos arcos
+                Edge* e1 = new Edge{v1, v2, 1};
+                Edge* e2 = new Edge{v2, v3, 1};
+                Edge* e3 = new Edge{v1, v3, 1};
+
+                // Creamos un grafo y agregamos los vértices y arcos
+                Graph g;
+                g.add_vertex(v1);
+                g.add_vertex(v2);
+                g.add_vertex(v3);
+                g.add_edge(e1);
+                g.add_edge(e2);
+                g.add_edge(e3);
+
+                // Imprimimos la lista de adyacencia del grafo
+                for (auto [v, edges] : g.adj_list) {
+                    cout << v->data << ": ";
+                    for (Edge* e : edges) {
+                    cout << e->dest->data << " ";
+                    }
+                    cout << endl;
+                }
+
+                return 0;
+                }
+            </pre>
+            <br>
+            <p>En este ejemplo, hemos creado una clase Graph que tiene un mapa adj_list para almacenar todos los vértices y sus listas de adyacencia. La clase tiene dos métodos, add_vertex y add_edge, que permiten agregar vértices y arcos al grafo, respectivamente.</p>
+            <br>
+            <br>
+            <p>Link de apoyo</p>
+            <br>
+            <li><a href="https://spa.myservername.com/graph-implementation-c-using-adjacency-list">Implementación de gráficos en C ++ mediante lista de adyacencia</a></li>
+            <li><a href="https://www.techiedelight.com/es/graph-implementation-using-stl/">IMPLEMENTACION Lista DE ADYACENCIA</a></li>            
+            <li><a href="https://ccia.ugr.es/~jfv/ed1/c++/cdrom4/paginaWeb/grafos.htm">Grafos</a></li>
+        </div>
+    </section>
+</body>
+</html>

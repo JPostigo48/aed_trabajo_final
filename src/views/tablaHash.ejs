@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Tablas Hash</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <center><h3>Funciones de Dispersión</h3></center>
+            <br>
+            <p>Una tabla hash es una estructura de datos que se utiliza para almacenar y acceder a datos de forma rápida y eficiente. Una tabla hash asigna a cada elemento de datos una "clave" única, que se utiliza para calcular un "índice" en una tabla de tamaño fijo. El elemento de datos se almacena en la tabla en la posición correspondiente al índice calculado.</p>
+            <br>
+            <p>La función de dispersión es una función matemática que se utiliza para calcular el índice en la tabla en el que se almacenará un elemento dado. La función de dispersión recibe como entrada la clave del elemento y devuelve un índice en la tabla.</p>
+            <br>
+            <p>Existen diferentes formas de implementar la función de dispersión, y la elección de una u otra dependerá del uso previsto de la tabla hash y de las características de los datos que se van a almacenar. Algunas formas comunes de implementar la función de dispersión son:</p>
+            <br>
+            <p>División: Esta es una función de dispersión simple que consiste en dividir la clave del elemento por el tamaño de la tabla y tomar el resto de la división como el índice.</p>
+            <br>
+            <p>Módulo: Similar a la división, esta función de dispersión consiste en calcular el resto de la clave del elemento dividida por el tamaño de la tabla.</p>
+            <br>
+            <p>Enmascaramiento: Esta función de dispersión consiste en aplicar una máscara binaria a la clave del elemento para obtener el índice.</p>
+            <br>
+            <p>Función de hash: Esta es una función de dispersión más compleja que utiliza un algoritmo específico para calcular el índice a partir de la clave del elemento. Las funciones de hash suelen ser más eficientes que otras formas de dispersión, pero también suelen ser más complicadas de implementar.</p>
+            <br>
+            <p>A continuacion el codigo para c++:</p>
+            <br>
+            <pre>
+                #include <iostream>
+                #include <vector>
+
+                using namespace std;
+
+                // Clase que representa un elemento de la tabla hash
+                class HashElement {
+                public:
+                int key;  // Clave del elemento
+                int value;  // Valor del elemento
+
+                HashElement(int key, int value) : key(key), value(value) {}
+                };
+
+                // Clase que representa la tabla hash
+                class HashTable {
+                private:
+                int size;  // Tamaño de la tabla
+                vector<HashElement> table;  // Vector que almacena los elementos de la tabla
+
+                // Función de dispersión por división
+                int hash(int key) {
+                    return key % size;
+                }
+
+                public:
+                HashTable(int size) : size(size) {
+                    // Inicializamos la tabla con elementos vacíos
+                    table = vector<HashElement>(size, HashElement(-1, -1));
+                }
+
+                // Función para establecer el valor de un elemento de la tabla
+                void set(int key, int value) {
+                    // Calculamos el índice de la tabla
+                    int index = hash(key);
+
+                    // Establecemos el valor del elemento
+                    table[index] = HashElement(key, value);
+                }
+
+                // Función para obtener el valor de un elemento de la tabla
+                int get(int key) {
+                    // Calculamos el índice de la tabla
+                    int index = hash(key);
+
+                    // Devolvemos el valor del elemento
+                    return table[index].value;
+                }
+                };
+
+                int main() {
+                    HashTable table(10);
+
+                    // Establecemos algunos valores de la tabla
+                    table.set(1, 10);
+                    table.set(2, 20);
+                    table.set(3, 30);
+
+                    // Mostramos el contenido de la tabla
+                    cout << "Valor de la clave 1: " << table.get(1) << endl;
+                    cout << "Valor de la clave 2: " << table.get(2) << endl;
+                    cout << "Valor de la clave 3: " << table.get(3) << endl;
+
+                    return 0;
+                }
+            </pre>
+            <br>
+            <p>Link de apoyo</p>
+            <li><a href="https://ccia.ugr.es/~jfv/ed1/tedi/cdrom/docs/tablash.html">Tabla HASH</a></li>
+            <li><a href="https://www.udb.edu.sv/udb_files/recursos_guias/informatica-ingenieria/programacion-con-estructuras-de-datos/2020/i/guia-8.pdf">GUIA - Tablas HASH</a></li>            
+            <li><a href="http://www.hci.uniovi.es/Products/DSTool/hash/hash-queSon.html">Qué son las tablas hash</a></li>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+          <center><h3>Análisis de complejidad computacional</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+          <br>
+          <p>Segment Tree</p>
+          <ul>
+              <li>Construcción: La complejidad para construir un árbol de segmentos es O(n * log n), donde n es el número de elementos en la secuencia. Esto se debe a que se deben realizar log n iteraciones para construir el árbol completo.</li>
+              <li>Consulta: La complejidad para realizar una consulta en un árbol de segmentos es O(log n), ya que solo se necesita una cantidad logarítmica de tiempo para encontrar la información deseada en el árbol.</li>
+              <li>Actualización: La complejidad para actualizar un elemento en un árbol de segmentos es O(log n), ya que solo se necesita una cantidad logarítmica de tiempo para actualizar el valor en el árbol.</li>
+          </ul>
+          <br>
+          <p>Interval Tree</p>
+          <ul>
+              <li>Construcción: La complejidad para construir un árbol de intervalos es O(n * log n), donde n es el número de intervalos en el conjunto. Esto se debe a que se deben realizar log n iteraciones para construir el árbol completo.</li>
+              <li>Consulta: La complejidad para realizar una consulta en un árbol de intervalos es O(log n), ya que solo se necesita una cantidad logarítmica de tiempo para encontrar la información deseada en el árbol.</li>
+              <li>Actualización: La complejidad para actualizar un elemento en un árbol de intervalos es O(log n), ya que solo se necesita una cantidad logarítmica de tiempo para actualizar el valor en el árbol</li>
+          </ul>
+          <br>
+          <p>Link de apoyo</p>
+          <li><a href="https://www.tutorialandexample.com/interval-tree">Interval Tree- TAE -tutorial</a></li>
+          <li><a href="https://www.oia.unsam.edu.ar/wp-content/uploads/2017/11/segment-tree.pdf">Estructura de datos "Segment Tree"</a></li>            
+          <li><a href="https://aprende.olimpiada-informatica.org/algoritmia-arboles-segmentos-1">Árboles de Segmentos</a></li>
+      </div>
+</body>
+</html>

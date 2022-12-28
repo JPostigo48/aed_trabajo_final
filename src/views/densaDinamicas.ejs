@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Matrices poco densas Dinamicas</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <br>
+            <p>Las matrices poco densas dinámicas son aquellas en las que la mayoría de los elementos son cero y que pueden cambiar durante la ejecución de un programa, agregando o eliminando entradas. Al igual que con las matrices poco densas estáticas, las matrices poco densas dinámicas son comunes en aplicaciones que representan grafos o redes, ya que muchos grafos tienen un número mucho mayor de vértices que de aristas.</p>
+            <br>
+            <p>Una forma eficiente de representar matrices poco densas dinámicas es mediante listas de adyacencia. En lugar de almacenar todos los elementos de la matriz, las listas de adyacencia solo almacenan las entradas no nulas. Esto permite ahorrar espacio y hacer que algunas operaciones sean más rápidas en comparación con las matrices de adyacencia.</p>
+            <br>
+            <p>A continuación se presenta un ejemplo de código en C++ que muestra cómo se puede crear y utilizar una lista de adyacencia para representar un grafo dinámico poco denso:</p>
+            <br>
+            <pre>
+                    #include <iostream>
+                    #include <list>
+                    
+                    using namespace std;
+                    
+                    // Clase que representa un elemento de la matriz
+                    class MatrixElement {
+                     public:
+                      int value;  // Valor del elemento
+                      int row;  // Fila del elemento
+                      int col;  // Columna del elemento
+                    
+                      MatrixElement(int value, int row, int col) : value(value), row(row), col(col) {}
+                    };
+                    
+                    // Clase que representa la matriz poco densa y dinámica
+                    class SparseDynamicMatrix {
+                     private:
+                      int numRows;  // Número de filas de la matriz
+                      int numCols;  // Número de columnas de la matriz
+                      list<list<MatrixElement>> matrix;  // Lista ligada de listas que representa la matriz
+                    
+                     public:
+                      SparseDynamicMatrix(int numRows, int numCols) : numRows(numRows), numCols(numCols) {
+                        // Inicializamos la matriz con tantas listas vacías como filas tenga la matriz
+                        for (int i = 0; i < numRows; i++) {
+                          matrix.push_back(list<MatrixElement>());
+                        }
+                      }
+                    
+                      // Función para establecer el valor de un elemento de la matriz
+                      void set(int value, int row, int col) {
+                        // Comprobamos si el elemento existe en la matriz
+                        list<MatrixElement> &rowList = matrix.at(row);
+                        for (MatrixElement &elem : rowList) {
+                          if (elem.col == col) {
+                            // Si existe, actualizamos su valor
+                            elem.value = value;
+                            return;
+                          }
+                        }
+                    
+                        // Si no existe, añadimos un nuevo elemento a la fila correspondiente
+                        rowList.push_back(MatrixElement(value, row, col));
+                      }
+                    
+                      // Función para obtener el valor de un elemento de la matriz
+                      int get(int row, int col) {
+                        // Buscamos el elemento en la fila correspondiente
+                        list<MatrixElement> &rowList = matrix.at(row);
+                        for (MatrixElement &elem : rowList) {
+                          if (elem.col == col) {
+                            // Si lo encontramos, devolvemos su valor
+                            return elem.value;
+                          }
+                        }
+                    
+                        // Si no lo encontramos, devolvemos cero
+                        return 0;
+                      }
+                    };
+
+                    int main() {
+                        SparseDynamicMatrix matrix(3, 4);
+                      
+                        // Establecemos algunos valores de la matriz
+                        matrix.set(1, 0, 0);
+                        matrix.set(2, 0, 3);
+                        matrix.set(3, 2, 1);
+                      
+                        // Mostramos el contenido de la matriz
+                        for (int i = 0; i < 3; i++) {
+                          for (int j = 0; j < 4; j++) {
+                            cout << matrix.get(i, j) << " ";
+                          }
+                          cout << endl;
+                        }
+                      
+                        return 0;
+                      }
+            </pre>
+            <br>
+            <p>Link de apoyo</p>
+            <li><a href="https://www.ibm.com/docs/es/iis/11.5?topic=variables-dynamic-arrays">Matrices dinamicas</a></li>
+            <li><a href="https://www.studocu.com/ec/document/universidad-central-del-ecuador/estructura-de-datos/apuntes-estructura-de-datos/31130831">Estructura de Datos</a></li>            
+            <li><a href="http://mauricioavilesc.blogspot.com/2015/08/matriz-dinamica-en-c.html">MATRIZ DINÁMICA EN C++</a></li>
+        </div>
+    </section>
+</body>
+</html>

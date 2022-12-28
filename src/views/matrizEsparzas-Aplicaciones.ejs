@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Aplicaciones de Matrices Esparzas.</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <br>
+            <p>Tiene muchas aplicaciones en diferentes áreas de la informática y la matemática. Algunas de las aplicaciones más comunes son:</p>
+            <br>
+            <p>Análisis de datos: Las matrices dispersas se utilizan a menudo para representar grandes conjuntos de datos en los que la mayoría de las entradas son cero. Por ejemplo, se pueden utilizar para representar una matriz de correlación entre variables, en la que muchas entradas son cero debido a la falta de correlación.</p>
+            <br>
+            <p>Procesamiento de imágenes: Las imágenes digitales a menudo se representan mediante matrices, y en muchos casos estas matrices son dispersas. Por ejemplo, una imagen en blanco y negro puede representarse mediante una matriz dispersa de tamaño MxN, donde M y N son el número de píxeles de la imagen.</p>
+            <br>
+            <p>Modelado matemático: Las matrices dispersas se utilizan a menudo en el modelado matemático para representar sistemas de ecuaciones lineales o sistemas dinámicos en los que muchas entradas de la matriz son cero.</p>
+            <br>
+            <p>Simulación de sistemas: Las matrices dispersas se utilizan a menudo en la simulación de sistemas dinámicos, como sistemas de transporte o sistemas eléctricos, para representar las relaciones entre diferentes componentes del sistema.</p>
+            <br>
+            <p>Link de apoyo</p>
+            <li><a href="http://dm.udc.es/elearning/MaterialDocente/sparse.pdf">Matrices Esparzas</a></li>
+            <li><a href="http://personales.upv.es/dginesta/docencia/posgrado/sparse.pdf">MATRICES DISPERSAS</a></li>            
+            <li><a href="https://www.analyticslane.com/2019/10/21/matrices-dispersas-sparse-matrix/">Matrices dispersas</a></li>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Densidad de Empaquetamiento</h3></center>
+            <br>
+            <p>La densidad de empaquetamiento en una tabla hash depende de la cantidad de elementos almacenados en la tabla y del tamaño de la tabla. En general, cuanto más elementos se almacenen en la tabla y cuanto más grande sea la tabla, mayor será la densidad de empaquetamiento.</p>
+            <br>
+            <p>Sin embargo, es importante tener en cuenta que la densidad de empaquetamiento en una tabla hash no es la única medida de rendimiento. La eficiencia de la función de dispersión y la cantidad de colisiones (es decir, cuántos elementos se almacenan en la misma posición de la tabla) también son factores importantes a considerar.</p>
+            <br>
+            <p>Por ejemplo, si una tabla hash tiene una función de dispersión eficiente y una baja tasa de colisiones, puede tener un rendimiento aceptable incluso con una densidad de empaquetamiento relativamente baja. Sin embargo, si la función de dispersión es ineficiente o la tasa de colisiones es alta, la tabla hash puede tener un rendimiento pobre incluso con una alta densidad de empaquetamiento.</p>
+            <br>
+            <p>A continuacion el codigo para c++ que calcula la densidad de empaquetamiento:</p>
+            <br>
+            <pre>
+                    #include <iostream>
+                    #include <unordered_map>
+                    
+                    using namespace std;
+                    
+                    int main() {
+                      // Creamos una tabla hash
+                      unordered_map<int, int> table;
+                    
+                      // Insertamos algunos elementos
+                      table[1] = 10;
+                      table[2] = 20;
+                      table[3] = 30;
+                    
+                      // Calculamos la densidad de empaquetamiento
+                      int used_buckets = table.bucket_count();  // Número de baldes utilizados
+                      int total_buckets = table.max_bucket_count();  // Número total de baldes disponibles
+                      float density = (float)used_buckets / (float)total_buckets;  // Densidad de empaquetamiento
+                    
+                      // Mostramos la densidad de empaquetamiento
+                      cout << "Densidad de empaquetamiento: " << density * 100 << "%" << endl;
+                    
+                      return 0;
+                    }
+            </pre>
+            <br>
+            <p>Link de apoyo</p>
+            <li><a href="https://www.it.uc3m.es/pbasanta/asng/course_notes/dynamic_data_structures_hash_table_table_size_es.html">Tabla HASH-tamaño de la tabla</a></li>
+            <li><a href="https://academicos.azc.uam.mx/jfg/diapositivas/almacenamiento/Unidad_9.pdf">Tablas HASH- Unidad 07</a></li>            
+            <li><a href="https://docplayer.es/21236386-Tema-05-tablas-hash-m-en-c-edgardo-adrian-franco-martinez-http-www-eafranco-com-edfrancom-ipn-mx-edfrancom-edgardoadrianfrancom.html">Estrucuturas de Datos: tablas hash</a></li>
+        </div>
+    </section>
+</body>
+</html>

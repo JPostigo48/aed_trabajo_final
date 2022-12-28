@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Matrices poco densas Estáticas</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <br>
+            <p>Las matrices poco densas son aquellas en las que la mayoría de los elementos son cero. Es decir, hay pocas entradas no nulas en la matriz en comparación con el número total de entradas. Las matrices poco densas son comunes en aplicaciones en las que se representan grafos o redes, ya que muchos grafos tienen un número mucho mayor de vértices que de aristas.</p>
+            <br>
+            <p>Las matrices estáticas son aquellas que no cambian después de su creación. Es decir, una vez que se ha definido una matriz estática, no se pueden agregar ni eliminar entradas de ella. En cambio, las matrices dinámicas son aquellas que pueden cambiar durante la ejecución de un programa, agregando o eliminando entradas.</p>
+            <br>
+            <p>Para matrices poco densas estáticas, una forma eficiente de representarlas es mediante una matriz de adyacencia, en la que cada entrada representa una arista en el grafo. Esto permite un acceso rápido a cualquier entrada de la matriz mediante índices y es adecuado para grafos de tamaño mediano o pequeño. Sin embargo, para grafos muy grandes o con muchas aristas, puede ser más eficiente utilizar otras estructuras de datos, como listas de adyacencia.</p>
+            <br>
+            <p>A continuacion el codigo para c++:</p>
+            <br>
+            <div class="panel-body">
+                <pre>
+                    <ol>
+                        <li>#include &lt;iostream&gt;</li>
+                        <li></li>
+                        <li>using namespace std;</li>
+                        <li></li>
+                        <li>const int MAX_V = 100;  // Número máximo de vértices</li>
+                        <li></li>
+                        <li>// Estructura para almacenar una matriz de adyacencia</li>
+                        <li>struct MatrizAdyacencia {</li>
+                        <li>  int V;  // Número de vértices</li>
+                        <li>  int E;  // Número de aristas</li>
+                        <li>  int matriz[MAX_V][MAX_V];  // Matriz de adyacencia</li>
+                        <li></li>
+                        <li>  // Constructor para inicializar la matriz</li>
+                        <li>  MatrizAdyacencia(int V) {</li>
+                        <li>    this->V = V;</li>
+                        <li>    this->E = 0;</li>
+                        <li>    for (int i = 0; i < V; i++) {</li>
+                        <li>      for (int j = 0; j < V; j++) {</li>
+                        <li>        matriz[i][j] = 0;</li>
+                        <li>      }</li>
+                        <li>    }</li>
+                        <li>  }</li>
+                        <li></li>
+                        <li>  // Método para agregar una arista entre los vértices u y v con peso w</li>
+                        <li>  void agregarArista(int u, int v, int w) {</li>
+                        <li>    matriz[u][v] = w;</li>
+                        <li>    E++;</li>
+                        <li>  }</li>
+                        <li></li>
+                        <li>  // Método para obtener el peso de la arista entre los vértices u y v</li>
+                        <li>  int obtenerPesoArista(int u, int v) {</li>
+                        <li>    return matriz[u][v];</li>
+                        <li>  }</li>
+                        <li></li>
+                        <li>  // Método para verificar si hay una arista entre los vértices u y v</li>
+                        <li>  bool hayArista(int u, int v) {</li>
+                        <li>    return matriz[u][v] != 0;</li>
+                        <li>  }</li>
+                        <li></li>
+                        <li>  // Método para eliminar la arista entre los vértices u y v</li>
+                        <li>  void eliminarArista(int u, int v) {</li>
+                        <li>    matriz[u][v] = 0;</li>
+                        <li>    E--;</li>
+                        <li>  }</li>
+                        <li></li>
+                        <li>  // Método para obtener el grado de un vértice (es decir, el número de aristas que tienen</li>
+                        <li>un vértice como extremo)</li>
+                        <li>  int obtenerGradoVertice(int v) {</li>
+                        <li>    int grado = 0;</li>
+                        <li>    for (int i = 0; i < V; i++) {</li>
+                        <li>      if (matriz[v][i] != 0) grado++;</li>
+                        <li>      if (matriz[i][v] != 0) grado++;</li>
+                        <li>    }</li>
+                        <li>    return grado;</li>
+                        <li>  }</li>
+                        <li>};</li>
+                        <li></li>
+                        <li>int main() {</li>
+                        <li>  // Crear una matriz de adyacencia 4x4 para representar un grafo con 4 vértices</li>
+                        <li>  MatrizAdyacencia matriz(4);</li>
+                        <li></li>
+                        <li>  // Agregar algunas aristas</li>
+                        <li>  matriz.agregarArista(0, 1, 10);</li>
+                        <li>  matriz.agregarArista(1, 2, 20);</li>
+                    </ol>
+                </pre>    
+            </div>
+            
+            <br>
+            <p>Link de apoyo</p>
+            <li><a href="https://tareasuniversitarias.com/matriz-poco-densa-regular.html">Matriz poco densa regular</a></li>
+            <li><a href="http://metodosdeprogra1.blogspot.com/2012/09/22-matrices-poco-densas.html">MATRICES POCO DENSAS - Metodos de Programación</a></li>            
+            <li><a href="http://metodos1utec.blogspot.com/2012/10/matricespoco-densas-y-matrices.html">MATRICES POCO DENSAS</a></li>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Matrices de Adyacencia</h3></center>
+            <br>
+            <p>Una matriz de adyacencia es una representación gráfica de un grafo en forma de una matriz cuadrada. Cada fila y columna de la matriz representa un vértice del grafo y cada elemento de la matriz representa la relación entre dos vértices.</p>
+            <br>
+            <p>Por ejemplo, si el grafo tiene cuatro vértices A, B, C y D, la matriz de adyacencia puede verse de la siguiente manera:</p>
+            <br>
+            <pre>
+                    A  B  C  D
+                A  0  1   1  0
+                B   1  0  1  0
+                C   1   1  0  1
+                D  0  0  1  0
+            </pre>
+            <br>
+            <p>En este caso, la matriz de adyacencia indica que hay una arista entre A y B, entre A y C, entre C y D, y entre B y C. Los elementos de la diagonal principal siempre tienen valor 0, ya que un vértice no puede tener una arista consigo mismo.</p>
+            <br>
+            <p>Una matriz de adyacencia es una forma útil de representar grafos que tienen pocos vértices y pocas aristas, ya que permite una fácil visualización y manipulación de la estructura del grafo. Sin embargo, para grafos más grandes, otras formas de representación, como la lista de adyacencia, pueden ser más eficientes en términos de espacio y tiempo.</p>
+            <br>
+            <p>A continuacion el codigo para c++:</p>
+            <br>
+            <pre>
+                #include <iostream>
+                #include <vector>
+
+                const int MAX_N = 100; // máximo número de vértices
+
+                // Grafo representado como una matriz de adyacencia
+                std::vector<std::vector<int>> adj_matrix(MAX_N, std::vector<int>(MAX_N));
+
+                int main()
+                {
+                    int n; // número de vértices
+                    int m; // número de aristas
+
+                    std::cin >> n >> m;
+
+                    // leer las aristas del grafo
+                    for (int i = 0; i < m; i++)
+                    {
+                        int u, v;
+                        std::cin >> u >> v;
+                        adj_matrix[u][v] = 1; // agregar arista entre u y v
+                    }
+
+                    // imprimir la matriz de adyacencia
+                    for (int i = 0; i < n; i++)
+                    {
+                        for (int j = 0; j < n; j++)
+                        {
+                            std::cout << adj_matrix[i][j] << " ";
+                        }
+                        std::cout << std::endl;
+                    }
+
+                    return 0;
+                }
+            </pre>
+            <br>
+            <p>Este código lee el número de vértices y el número de aristas del grafo desde la entrada estándar, luego lee cada una de las aristas y las agrega a la matriz de adyacencia. Finalmente, imprime la matriz de adyacencia completa.</p>
+            <br>
+            <p>Link de apoyo</p>
+            <br>
+            <li><a href="http://aulas.uruguayeduca.edu.uy/pluginfile.php/30318/mod_resource/content/1/2.3%20-%20Parte%202%20-%20Representaci%C3%B3n%20de%20Grafos.pdf">Representación de Grafos - Uruguay Educa</a></li>
+            <li><a href="https://yoandroide.xyz/grafos-implementacion-matriz-de-adyacencia-en-java/">IMPLEMENTACION MATRIZ DE ADYACENCIA</a></li>            
+            <li><a href="https://aprendeyprogramablog.wordpress.com/2016/07/12/grafos-2/">APRENDE Y PROGRAMA</a></li>
+        </div>
+    </section>
+</body>
+</html>

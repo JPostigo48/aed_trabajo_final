@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Complejidad computacional</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <br>
+            <p>El análisis de complejidad computacional de una matriz de adyacencia se refiere a la cantidad de tiempo y espacio que se necesita para realizar operaciones con una matriz de adyacencia en un algoritmo. La complejidad puede medirse en términos de la cantidad de operaciones aritméticas que se necesitan para realizar una tarea específica, o en términos del tamaño del problema (es decir, el número de vértices y aristas en la matriz).</p>
+            <br>
+            <p>Uno de los aspectos más importantes a considerar al analizar la complejidad de una matriz de adyacencia es el tiempo que se necesita para acceder a un elemento específico de la matriz. En una matriz de adyacencia, los elementos se almacenan en una forma matricial y se pueden acceder mediante dos índices, uno para la fila y otro para la columna. Esto significa que el tiempo de acceso a un elemento específico es O(1), lo que significa que es constante y no depende del tamaño de la matriz.</p>
+            <br>
+            <p>Otras operaciones que pueden realizarse con una matriz de adyacencia incluyen la búsqueda de caminos entre vértices, la detección de ciclos y la determinación de la conectividad de un grafo. La complejidad de estas operaciones puede variar dependiendo del algoritmo utilizado, pero en general, se espera que sean O(V^2), donde V es el número de vértices en el grafo.</p>
+            <br>
+            <p>Link de apoyo</p>
+            <li><a href="http://cs.uns.edu.ar/~prf/teaching/AyC17/downloads/Teoria/Grafos-1x1.pdf">Algortimos sobre grafos</a></li>
+            <li><a href="https://www.fceia.unr.edu.ar/estruc/2006/graffund.htm#:~:text=Matrices%20de%20Adyacencia%20(%20Adjacency%20Matrices,v%C3%A9rtices%20que%20determinan%20la%20celda.&text=Observar%20que%20en%20todos%20los,la%20matriz%20tiene%20solo%20ceros.">Estructura de Datos : Grafos - Fundamentos - FCEIA</a></li>            
+            <li><a href="https://docplayer.es/51909125-Algoritmica-y-complejidad-tema-4-algoritmos-sobre-grafos.html">Algorítmica y Complejidad.</a></li>
+        </div>
+    </section>
+</body>
+</html>

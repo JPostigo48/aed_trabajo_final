@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Operaciones de Inserción, Eliminación y Búsqueda</h3></center>
+            <br>
+            <p>Las tablas hash son una estructura de datos muy útil que se utiliza para almacenar y acceder a datos de forma rápida. En C++, se pueden utilizar diferentes clases y métodos para trabajar con tablas hash, como "unordered_map" y "unordered_set".</p>
+            <br>
+            <p>Inserción: Para insertar un elemento en una tabla hash, se puede utilizar el operador de asignación "=" o el método "insert".</p>
+            <br>
+            <p>Eliminación: Para eliminar un elemento de una tabla hash, se puede utilizar el método "erase" y proporcionar la clave del elemento a eliminar.</p>
+            <br>
+            <p>Búsqueda: Para buscar un elemento en una tabla hash, se puede utilizar el método "find" y proporcionar la clave del elemento a buscar. Este método devuelve un iterador al elemento si se encuentra, o "table.end()" si no se encuentra.</p>
+            <br>
+            <p>A continuacion el codigo para c++ con la operaciones:</p>
+            <br>
+            
+            <pre>
+                #include <iostream>
+                #include <unordered_map>
+
+                using namespace std;
+
+                int main() {
+                // Creamos una tabla hash
+                unordered_map<int, int> table;
+
+                // Insertamos algunos elementos
+                table[1] = 10;
+                table[2] = 20;
+                table[3] = 30;
+
+                // Mostramos el contenido de la tabla
+                cout << "Contenido de la tabla:" << endl;
+                for (auto& kv : table) {
+                    cout << kv.first << ": " << kv.second << endl;
+                }
+
+                // Eliminamos un elemento
+                table.erase(2);
+
+                // Mostramos el contenido de la tabla después de la eliminación
+                cout << "\nContenido de la tabla después de la eliminación:" << endl;
+                for (auto& kv : table) {
+                    cout << kv.first << ": " << kv.second << endl;
+                }
+
+                // Buscamos un elemento en la tabla
+                auto it = table.find(3);
+                if (it != table.end()) {
+                    cout << "\nSe ha encontrado el elemento con clave 3: " << it->second << endl;
+                } else {
+                    cout << "\nNo se ha encontrado el elemento con clave 3" << endl;
+                }
+
+                return 0;
+                }
+            </pre>
+            <br>
+            <p>Link de apoyo</p>
+            <li><a href="https://www.it.uc3m.es/pbasanta/asng/course_notes/dynamic_data_structures_hash_table_table_size_es.html">Tabla HASH-tamaño de la tabla</a></li>
+            <li><a href="https://academicos.azc.uam.mx/jfg/diapositivas/almacenamiento/Unidad_9.pdf">Tablas HASH- Unidad 07</a></li>            
+            <li><a href="https://docplayer.es/21236386-Tema-05-tablas-hash-m-en-c-edgardo-adrian-franco-martinez-http-www-eafranco-com-edfrancom-ipn-mx-edfrancom-edgardoadrianfrancom.html">Estrucuturas de Datos: tablas hash</a></li>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Optimización en eficiencia de Matrices Esparzas.</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <br>
+            <p>Una matriz dispersa es una matriz en la que la mayoría de sus elementos son cero. Esto significa que hay muchas entradas de la matriz que no contienen ningún valor. Las matrices dispersas se utilizan a menudo cuando se trabaja con grandes conjuntos de datos, ya que pueden ser más eficientes almacenar y procesar que las matrices densas, que tienen una alta proporción de elementos no nulos.</p>
+            <br>
+            <p>Optimización</p>
+            <br>
+            <p>Utilizar una estructura de datos adecuada para almacenar la matriz. Algunas opciones populares son una lista ligada de listas o una matriz de tripletas. Elije la estructura que mejor se adapte a tus necesidades.</p>
+            <br>
+            <p>Utilizar una forma eficiente de buscar y acceder a los elementos de la matriz. Por ejemplo, si utilizas una lista ligada de listas, utiliza un iterador para recorrer las listas en lugar de acceder a los elementos mediante un índice.</p>
+            <br>
+            <p>Optimiza las operaciones de multiplicación de matrices. La multiplicación de matrices es una operación costosa en términos de tiempo de ejecución, por lo que es importante hacerla lo más eficiente posible. Algunas opciones son utilizar un algoritmo especializado para multiplicar matrices dispersas o utilizar técnicas de paralelización para distribuir el trabajo entre varios procesadores.</p>
+            <br>
+            <p>Link de apoyo</p>
+            <li><a href="https://sites.google.com/site/tallerdeprogramacionpoli/topics/5-matrices-dispersas-como-tripletas/5-3-matrices-dispersas-como-listas-forma-2">Matrices Dispersas</a></li>
+            <li><a href="https://dialnet.unirioja.es/descarga/articulo/4269741.pdf">MATRICES DISPERSAS DESCRIPCION Y APLICACIONES</a></li>            
+            <li><a href="http://jldelafuenteoconnor.es/Clase_dispersa_2016.pdf">Matrices dispersas</a></li>
+        </div>
+    </section>
+</body>
+</html>
