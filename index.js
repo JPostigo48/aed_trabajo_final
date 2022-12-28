@@ -3,22 +3,22 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
 // Routes
-import indexRoutes from "./routes/index.js";
+import indexRoutes from "./src/routes/index.js";
 
 // Initialize express
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // settings
-app.set("port", 3000);
-app.set("views", join(__dirname, "views"));
+app.set("port", process.env.PORT || 3000);
+app.set("views", join(__dirname, "src/views"));
 app.set("view engine", "ejs");
 
 // routes
 app.use(indexRoutes);
 
 // static files
-app.use(express.static(join(__dirname, "public")));
+app.use(express.static(join(__dirname, "src/public")));
 
 // listening the Server
 app.listen(app.get("port"));
