@@ -16,15 +16,31 @@
         
         <div class="derecha">
             <div class="borde">
-            <center><h3>Estructura y diseño de una LSE</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <center><h3>Segment Tree e Interval Tree</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
             <br>
-            <p>Una lista simplemente enlazada es una de las estructuras de datos fundamentales, y puede ser usada para implementar otras estructuras de datos. Consiste en una secuencia de nodos, en los que se guardan campos de datos arbitrarios y una o dos referencias (punteros) al nodo anterior o posterior. El principal beneficio de las listas enlazadas respecto a los array convencionales es que el orden de los elementos enlazados puede ser diferente al orden de almacenamiento en la memoria o el disco, permitiendo que el orden de recorrido de la lista sea diferente al de almacenamiento.</p>
+            <h5>Segment Tree o Árbol de Segmentos</h5>
+            <p>Un árbol de segmentos es una estructura de datos que se utiliza para almacenar información sobre un rango de valores. Es útil para resolver problemas de consulta y actualización en rangos en tiempo logarítmico.</p>
+            <p>La estructura del árbol de segmentos consta de nodos que representan un rango de valores. Cada nodo del árbol de segmentos almacena información sobre el rango de valores que representa, y puede tener dos hijos que representan subrangos más pequeños del rango original.</p>
+            <p>Por ejemplo, si quisiéramos construir un árbol de segmentos que almacenara información sobre el rango de números enteros de 1 a 10, podríamos tener un nodo raíz que representara el rango completo de 1 a 10, y dos hijos que representaran los subrangos de 1 a 5 y 6 a 10, respectivamente. Los nodos hijos a su vez podrían tener dos hijos cada uno, que representarían los subrangos aún más pequeños, y así sucesivamente.</p>
+            <p>Para realizar consultas en un árbol de segmentos, podemos utilizar una función de consulta recursiva que recorra el árbol desde la raíz hasta el nodo que representa el rango de valores que deseamos consultar. Para actualizaciones en un rango, podemos utilizar una función de actualización recursiva similar para modificar la información almacenada en los nodos del árbol de segmentos que representan el rango especificado.</p>
+            <p>En resumen, un árbol de segmentos es una estructura de datos eficiente para realizar consultas y actualizaciones en rangos en tiempo logarítmico, y es útil en una variedad de problemas en los que se necesita realizar operaciones en rangos de valores.</p>
+
+            <h5>Interval Tree o Árbol de Intervalos</h5>
+            <p>Un árbol de intervalos es una estructura de datos que se utiliza para almacenar y buscar intervalos de valores. Es útil para resolver problemas en los que es necesario encontrar todos los intervalos que se intersectan con un intervalo dado en un tiempo rápido.</p>
+            <p>La estructura del árbol de intervalos es similar a la de un árbol binario de búsqueda, con la diferencia de que cada nodo del árbol de intervalos almacena un intervalo en lugar de un valor individual. Los nodos del árbol de intervalos se organizan de tal manera que los nodos a la izquierda contienen intervalos con valores más pequeños, y los nodos a la derecha contienen intervalos con valores más grandes.</p>
+            <p>Para buscar intervalos que se intersectan con un intervalo dado, podemos utilizar una función de búsqueda recursiva que recorra el árbol desde la raíz. Si el intervalo dado se intersecta con el intervalo almacenado en el nodo actual, podemos agregar este intervalo a una lista de resultados y continuar la búsqueda en ambos hijos del nodo. Si el intervalo dado no se intersecta con el intervalo del nodo actual, podemos continuar la búsqueda solo en el hijo adecuado (izquierdo o derecho) según el rango del intervalo dado.</p>
+            <p>En resumen, un árbol de intervalos es una estructura de datos útil para encontrar todos los intervalos que se intersectan con un intervalo dado en un tiempo rápido, y se utiliza en una variedad de problemas en los que es necesario buscar y trabajar con intervalos de valores.</p>
 
             
             <p>Link de apoyo</p>
-            <li><a href="https://blog.martincruz.me/2012/10/listas-enlazadas-simples-en-c.html">Implementación en C++</a></li>
-            <li><a href="https://www.techiedelight.com/es/linked-list-implementation-cpp/">Implementación de listas enlazadas en C++</a></li>            
-            <li><a href="http://programacionparacoccidio.blogspot.com/2013/01/listas-enlazadas-en-c-orientado-objetos.html">Listas Enlazadas en C++ Orientado a Objetos</a></li>
+            <li><a href="https://cp-algorithms.com/data_structures/segment_tree.html">Segment Tree para Programación Competitiva</a></li>
+            <li><a href="https://www.geeksforgeeks.org/interval-tree/">Interval Tree</a></li>
+
+            <br />
+            <div class="siguiente">
+              <p>Siguiente tema:</p>
+              <a href="/analisiABE">Análisis de complejidad computacional >></a>
+            </div>
         </div>
     </div>
     </section>

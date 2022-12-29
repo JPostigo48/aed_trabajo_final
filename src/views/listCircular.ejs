@@ -16,15 +16,179 @@
         
         <div class="derecha">
             <div class="borde">
-            <center><h3>Estructura y diseño de una LSE</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <center><h3>Listas circulares y operaciones</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
             <br>
-            <p>Una lista simplemente enlazada es una de las estructuras de datos fundamentales, y puede ser usada para implementar otras estructuras de datos. Consiste en una secuencia de nodos, en los que se guardan campos de datos arbitrarios y una o dos referencias (punteros) al nodo anterior o posterior. El principal beneficio de las listas enlazadas respecto a los array convencionales es que el orden de los elementos enlazados puede ser diferente al orden de almacenamiento en la memoria o el disco, permitiendo que el orden de recorrido de la lista sea diferente al de almacenamiento.</p>
+            <p>Una lista circular es un tipo de estructura de datos en la que cada elemento tiene un enlace a otro elemento en la lista, formando una estructura circular. Esto significa que la lista no tiene un comienzo o un final definidos, sino que cada elemento de la lista se encuentra en una posición relativa a los demás elementos.</p>
+            <p>Una de las principales ventajas de las listas circulares es que permiten un acceso rápido a cualquier elemento de la lista, ya que no es necesario recorrer la lista desde el principio para llegar a un elemento específico. Además, las listas circulares también pueden ser útiles en situaciones en las que se desea implementar una estructura de datos que permita el recorrido continuo de los elementos, como en el caso de una lista de reproducción de música o una lista de imágenes en una presentación.</p>
+            <p>Otra ventaja de las listas circulares es que pueden ser implementadas de manera eficiente utilizando punteros, lo que permite un acceso rápido a cualquier elemento de la lista y una inserción y eliminación rápidas de elementos. Sin embargo, también es importante tener en cuenta que las listas circulares requieren más espacio de memoria que otras estructuras de datos, ya que cada elemento debe almacenar un enlace adicional a otro elemento de la lista.</p>
+            <h5>Insertar:</h5>
+            <p>Para insertar un elemento en una lista circular, necesitarás seguir los siguientes pasos:</p>
+            <li>Crea un nuevo nodo para almacenar el elemento que deseas insertar. Este nodo debe tener un campo para el valor del elemento y otro para el enlace al siguiente elemento de la lista.</li>
+            <li>Si la lista está vacía, debes establecer el enlace del nodo recién creado al mismo nodo, de manera que forme una lista circular con un solo elemento.</li>
+            <li>Si la lista ya tiene elementos, debes encontrar el lugar donde deseas insertar el nuevo elemento. Puedes hacer esto recorriendo la lista hasta encontrar el elemento anterior al que deseas insertar o utilizando un puntero para saltar directamente al lugar correcto.</li>
+            <li>Una vez que hayas encontrado el lugar correcto, debes establecer el enlace del nodo anterior al nuevo nodo y el enlace del nuevo nodo al siguiente nodo en la lista. De esta manera, el nuevo nodo queda insertado en la lista circular en la posición correcta.</li>
+            <p>Es importante tener en cuenta que, al tratarse de una lista circular, el último elemento de la lista debe tener un enlace al primer elemento de la lista. De esta manera, la lista circular queda cerrada y permite el recorrido continuo de sus elementos.</p>
 
+            <div class="panel-body">
+                <pre>
+                    <ol>
+                        <li>class ListaCircular {</li>
+                            <li> private:</li>
+                            <li>  struct Nodo {</li>
+                            <li>    int valor;</li>
+                            <li>    Nodo* siguiente;</li>
+                            <li>  };</li>
+                            <li>  Nodo* cabeza;</li>
+                            <li></li>
+                            <li> public:</li>
+                            <li>  ListaCircular() : cabeza(nullptr) {}</li>
+                            <li></li>
+                            <li>  void Insertar(int valor) {</li>
+                            <li>    // Crea un nuevo nodo para almacenar el valor</li>
+                            <li>    Nodo* nuevo = new Nodo;</li>
+                            <li>    nuevo-&gt;valor = valor;</li>
+                            <li></li>
+                            <li>    if (cabeza == nullptr) {</li>
+                            <li>      // Si la lista está vacía, el nuevo nodo es la cabeza y tiene enlace a sí mismo</li>
+                            <li>      cabeza = nuevo;</li>
+                            <li>      cabeza-&gt;siguiente = cabeza;</li>
+                            <li>    } else {</li>
+                            <li>      // Si la lista ya tiene elementos, encuentra el último nodo y enlázalo con el nuevo nodo</li>
+                            <li>      Nodo* ultimo = cabeza;</li>
+                            <li>      while (ultimo-&gt;siguiente != cabeza) {</li>
+                            <li>        ultimo = ultimo-&gt;siguiente;</li>
+                            <li>      }</li>
+                            <li>      ultimo-&gt;siguiente = nuevo;</li>
+                            <li>      nuevo-&gt;siguiente = cabeza;</li>
+                            <li>    }</li>
+                            <li>  }</li>
+                            <li>};</li>                            
+                    </ol>
+                </pre>
+            </div>
+
+            <h5>Eliminar</h5>
+            <p>Para eliminar un elemento de una lista circular, debes seguir los siguientes pasos:</p>
+            <li>Encuentra el nodo que almacena el elemento que deseas eliminar. Puedes hacer esto recorriendo la lista hasta encontrar el elemento o utilizando un puntero para saltar directamente al lugar correcto.</li>
+            <li>Una vez que has encontrado el nodo que almacena el elemento a eliminar, debes eliminar el enlace al siguiente nodo de la lista. Para ello, debes establecer el enlace del nodo anterior al siguiente nodo en la lista, saltándose el nodo que deseas eliminar.</li>
+            <li>Finalmente, debes eliminar el nodo que almacena el elemento a eliminar. Esto puede hacerse utilizando la función delete de C++ o la función free de C.</li>
+            <p>Es importante tener en cuenta que, al tratarse de una lista circular, debes asegurarte de que el último elemento de la lista tenga un enlace al primer elemento de la lista después de eliminar el elemento. De esta manera, la lista circular queda cerrada y permite el recorrido continuo de sus elementos.</p>
+
+            <div class="panel-body">
+                <pre>
+                    <ol>
+                        <li>class ListaCircular {</li>
+                            <li> private:</li>
+                            <li>  struct Nodo {</li>
+                            <li>    int valor;</li>
+                            <li>    Nodo* siguiente;</li>
+                            <li>  };</li>
+                            <li>  Nodo* cabeza;</li>
+                            <li></li>
+                            <li> public:</li>
+                            <li>  ListaCircular() : cabeza(nullptr) {}</li>
+                            <li></li>
+                            <li>  void Eliminar(int valor) {</li>
+                            <li>    // Si la lista está vacía, no hay nada que eliminar</li>
+                            <li>    if (cabeza == nullptr) {</li>
+                            <li>      return;</li>
+                            <li>    }</li>
+                            <li></li>
+                            <li>    // Si el elemento a eliminar es el único de la lista, elimina la cabeza</li>
+                            <li>    if (cabeza-&gt;siguiente == cabeza && cabeza-&gt;valor == valor) {</li>
+                            <li>      delete cabeza;</li>
+                            <li>      cabeza = nullptr;</li>
+                            <li>      return;</li>
+                            <li>    }</li>
+                            <li></li>
+                            <li>    // Si el elemento a eliminar es la cabeza, encuentra el último nodo y cambia la cabeza</li>
+                            <li>    if (cabeza-&gt;valor == valor) {</li>
+                            <li>      Nodo* ultimo = cabeza;</li>
+                            <li>      while (ultimo-&gt;siguiente != cabeza) {</li>
+                            <li>        ultimo = ultimo-&gt;siguiente;</li>
+                            <li>      }</li>
+                            <li>      cabeza = cabeza-&gt;siguiente;</li>
+                            <li>      ultimo-&gt;siguiente = cabeza;</li>
+                            <li>      delete ultimo;</li>
+                            <li>      return;</li>
+                            <li>    }</li>
+                            <li></li>
+                            <li>    // Si el elemento a eliminar está en otra parte de la lista, busca su nodo anterior y enlázalo con el siguiente</li>
+                            <li>    Nodo* anterior = cabeza;</li>
+                            <li>    while (anterior-&gt;siguiente != cabeza && anterior-&gt;siguiente-&gt;valor != valor) {</li>
+                            <li>      anterior = anterior-&gt;siguiente;</li>
+                            <li>    }</li>
+                            <li></li>
+                            <li>    // Si se encontró el elemento a eliminar, elimina su nodo y enlaza el anterior con el siguiente</li>
+                            <li>    if (anterior-&gt;siguiente != cabeza) {</li>
+                            <li>      Nodo* eliminar = anterior-&gt;siguiente;</li>
+                            <li>      anterior-&gt;siguiente = eliminar-&gt;siguiente;</li>
+                            <li>      delete eliminar;</li>
+                            <li>    }</li>
+                            <li>  }</li>
+                            <li>};</li>                            
+                    </ol>
+                </pre>
+            </div>
+
+            <h5>Buscar:</h5>
+            <p>Para buscar un elemento en una lista circular, puedes seguir los siguientes pasos:</p>
+            <li>Comienza en el primer elemento de la lista y recorre la lista hasta encontrar el elemento que deseas buscar o hasta llegar al final de la lista.</li>
+            <li>Mientras recorres la lista, comparas el valor de cada elemento con el valor que estás buscando. Si encuentras un elemento con el valor correcto, puedes devolver el elemento o la posición en la que se encuentra.</li>
+            <li>Si llegas al final de la lista y no has encontrado el elemento que estás buscando, debes volver al principio de la lista y continuar recorriendo hasta encontrar el elemento o hasta llegar de nuevo al final de la lista.</li>
+            <p>Es importante tener en cuenta que, al tratarse de una lista circular, debes asegurarte de que no entras en un bucle infinito mientras recorres la lista. Una forma de evitar esto es utilizar una variable para llevar la cuenta del número de elementos que has recorrido y detener la búsqueda cuando hayas recorrido todos los elementos de la lista.</p>
+
+            <div class="panel-body">
+                <pre>
+                    <ol>
+                        <li>class ListaCircular {</li>
+                            <li> private:</li>
+                            <li>  struct Nodo {</li>
+                            <li>    int valor;</li>
+                            <li>    Nodo* siguiente;</li>
+                            <li>  };</li>
+                            <li>  Nodo* cabeza;</li>
+                            <li></li>
+                            <li> public:</li>
+                            <li>  ListaCircular() : cabeza(nullptr) {}</li>
+                            <li></li>
+                            <li>  int Buscar(int valor) {</li>
+                            <li>    // Si la lista está vacía, devuelve -1</li>
+                            <li>    if (cabeza == nullptr) {</li>
+                            <li>      return -1;</li>
+                            <li>    }</li>
+                            <li></li>
+                            <li>    // Recorre la lista hasta encontrar el elemento o llegar al final de la lista</li>
+                            <li>    Nodo* actual = cabeza;</li>
+                            <li>    int posicion = 0;</li>
+                            <li>    while (actual-&gt;siguiente != cabeza && actual-&gt;valor != valor) {</li>
+                            <li>      actual = actual-&gt;siguiente;</li>
+                            <li>      posicion++;</li>
+                            <li>    }</li>
+                            <li></li>
+                            <li>    // Si se encontró el elemento, devuelve su posición</li>
+                            <li>    if (actual-&gt;valor == valor) {</li>
+                            <li>      return posicion;</li>
+                            <li>    }</li>
+                            <li></li>
+                            <li>    // Si no se encontró el elemento, devuelve -1</li>
+                            <li>    return -1;</li>
+                            <li>  }</li>
+                            <li>};</li>                            
+                    </ol>
+                </pre>
+            </div>
             
             <p>Link de apoyo</p>
-            <li><a href="https://blog.martincruz.me/2012/10/listas-enlazadas-simples-en-c.html">Implementación en C++</a></li>
-            <li><a href="https://www.techiedelight.com/es/linked-list-implementation-cpp/">Implementación de listas enlazadas en C++</a></li>            
-            <li><a href="http://programacionparacoccidio.blogspot.com/2013/01/listas-enlazadas-en-c-orientado-objetos.html">Listas Enlazadas en C++ Orientado a Objetos</a></li>
+            <li><a href="https://www.geeksforgeeks.org/circular-linked-list/">Listas Circulares</a></li>
+            <li><a href="https://www.tutorialspoint.com/data_structures_algorithms/circular_linked_list_algorithm.htm">Listas Circulares en C++, Java y Python</a></li>
+
+
+            <br />
+            <div class="siguiente">
+              <p>Siguiente tema:</p>
+              <a href="/analisisLSE">Análisis de complejidad computacional >></a>
+            </div>
         </div>
     </div>
     </section>

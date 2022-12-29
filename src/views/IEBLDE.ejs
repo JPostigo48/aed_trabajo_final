@@ -16,15 +16,110 @@
         
         <div class="derecha">
             <div class="borde">
-            <center><h3>Estructura y diseño de una LSE</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <center><h3>Operaciones Insertar, Eliminar y Buscar en LDE</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
             <br>
-            <p>Una lista simplemente enlazada es una de las estructuras de datos fundamentales, y puede ser usada para implementar otras estructuras de datos. Consiste en una secuencia de nodos, en los que se guardan campos de datos arbitrarios y una o dos referencias (punteros) al nodo anterior o posterior. El principal beneficio de las listas enlazadas respecto a los array convencionales es que el orden de los elementos enlazados puede ser diferente al orden de almacenamiento en la memoria o el disco, permitiendo que el orden de recorrido de la lista sea diferente al de almacenamiento.</p>
+            <p>Para simplificar la programaci.ón, es conveniente agregar nodos especiales en los extremos de lista doblemente enlazada: un nodo header (cabeza) justo antes de la cabeza de la lista, y un nodo trailer (cola) justo despu.es de la cola de la lista. Estos nodos \falsos" o centinelas no guardan ningún elemento. La cabeza tiene una referencia sig válida pero una referencia prev nula, mientras cola tiene una referencia prev válida pero una referencia sig nula.</p>
 
-            
+            <h5>Insertar:</h5>
+            <p>Partimos de una lista no vacía. Para simplificar, consideraremos que lista apunta al primer elemento de la lista doblemente enlazada:</p>
+            <center>
+                <img src="https://conclase.net/imagen/c/edd/id_primero2.gif" />
+            </center>
+            <p>El proceso es el siguiente:</p>
+            <li>nodo->siguiente debe apuntar a Lista.</li>
+            <li>nodo->anterior apuntará a Lista->anterior.</li>
+            <li>Lista->anterior debe apuntar a nodo.</li>
+            <p>Recuerda que Lista no tiene por qué apuntar a ningún miembro concreto de una lista doblemente enlazada, cualquier miembro es igualmente válido como referencia.</p>
+
+            <div class="panel-body">
+                <pre>
+                    <ol>
+                        <li>void Insertar(Lista *lista, int v) {</li>
+                            <li>   pNodo nuevo, actual;</li>
+                            <li></li>
+                            <li>   /* Crear un nodo nuevo */</li>
+                            <li>   nuevo = (pNodo)malloc(sizeof(tipoNodo));</li>
+                            <li>   nuevo-&gt;valor = v;</li>
+                            <li></li>
+                            <li>   /* Colocamos actual en la primera posición de la lista */</li>
+                            <li>   actual = *lista;</li>
+                            <li>   if(actual) while(actual-&gt;anterior) actual = actual-&gt;anterior;</li>
+                            <li></li>
+                            <li>   /* Si la lista está vacía o el primer miembro es mayor que el nuevo */</li>
+                            <li>   if(!actual || actual-&gt;valor &gt; v) {</li>
+                            <li>      /* Añadimos la lista a continuación del nuevo nodo */</li>
+                            <li>      nuevo-&gt;siguiente = actual;</li>
+                            <li>      nuevo-&gt;anterior = NULL;</li>
+                            <li>      if(actual) actual-&gt;anterior = nuevo;</li>
+                            <li>      if(!*lista) *lista = nuevo;</li>
+                            <li>   }</li>
+                            <li>   else {</li>
+                            <li>      /* Avanzamos hasta el último elemento o hasta que el siguiente tenga</li>
+                            <li>         un valor mayor que v */</li>
+                            <li>      while(actual-&gt;siguiente && actual-&gt;siguiente-&gt;valor &lt;= v)</li>
+                            <li>         actual = actual-&gt;siguiente;</li>
+                            <li>      /* Insertamos el nuevo nodo después del nodo anterior */</li>
+                            <li>      nuevo-&gt;siguiente = actual-&gt;siguiente;</li>
+                            <li>      actual-&gt;siguiente = nuevo;</li>
+                            <li>      nuevo-&gt;anterior = actual;</li>
+                            <li>      if(nuevo-&gt;siguiente) nuevo-&gt;siguiente-&gt;anterior = nuevo;</li>
+                            <li>   }</li>
+                            <li>}</li>                            
+                    </ol>
+                </pre>
+            </div>
+
+
+            <h5>Eliminar:</h5>
+            <p>Tenemos los dos casos posibles, que el nodo a borrar esté apuntado por Lista o que no. Si lo está, simplemente hacemos que Lista sea Lista->siguiente.</p>
+            <center>
+                <img src="https://conclase.net/imagen/c/edd/bd_primero2.gif" />
+            </center>
+            <li>Si nodo apunta a Lista, hacemos que Lista apunte a Lista->siguiente.</li>
+            <li>Hacemos que nodo->siguiente->anterior apunte a NULL</li>
+            <li>Borramos el nodo apuntado por nodo.</li>
+            <div class="panel-body">
+                <pre>
+                    <ol>
+                        <li>void Borrar(Lista *lista, int v) {</li>
+                            <li>   pNodo nodo;</li>
+                            <li></li>
+                            <li>   /* Buscar el nodo de valor v */</li>
+                            <li>   nodo = *lista;</li>
+                            <li>   while(nodo && nodo-&gt;valor &lt; v) nodo = nodo-&gt;siguiente;</li>
+                            <li>   while(nodo && nodo-&gt;valor &gt; v) nodo = nodo-&gt;anterior;</li>
+                            <li></li>
+                            <li>   /* El valor v no está en la lista */</li>
+                            <li>   if(!nodo || nodo-&gt;valor != v) return;</li>
+                            <li></li>
+                            <li>   /* Borrar el nodo */</li>
+                            <li>   /* Si lista apunta al nodo que queremos borrar, apuntar a otro */</li>
+                            <li>   if(nodo == *lista)</li>
+                            <li>     if(nodo-&gt;anterior) *lista = nodo-&gt;anterior;</li>
+                            <li>     else *lista = nodo-&gt;siguiente;</li>
+                            <li></li>
+                            <li>   if(nodo-&gt;anterior) /* no es el primer elemento */</li>
+                            <li>      nodo-&gt;anterior-&gt;siguiente = nodo-&gt;siguiente;</li>
+                            <li>   if(nodo-&gt;siguiente) /* no es el último nodo */</li>
+                            <li>      nodo-&gt;siguiente-&gt;anterior = nodo-&gt;anterior;</li>
+                            <li>   free(nodo);</li>
+                            <li>}</li>                            
+                    </ol>
+                </pre>
+            </div>
+
+
+
             <p>Link de apoyo</p>
-            <li><a href="https://blog.martincruz.me/2012/10/listas-enlazadas-simples-en-c.html">Implementación en C++</a></li>
-            <li><a href="https://www.techiedelight.com/es/linked-list-implementation-cpp/">Implementación de listas enlazadas en C++</a></li>            
-            <li><a href="http://programacionparacoccidio.blogspot.com/2013/01/listas-enlazadas-en-c-orientado-objetos.html">Listas Enlazadas en C++ Orientado a Objetos</a></li>
+            <li><a href="https://sites.google.com/site/edatosubo/4-estructura-de-datos-dinamicas/1-listas/2-listas-doblemente-enlazadas">Listas Doblemente Enlazadas</a></li>
+        
+            <li><a href="https://conclase.net/c/edd/cap5">Listas Doblemente Enlazadas e implementación</a></li>
+            <li><a href="https://es.ccm.net/ordenadores/programacion/1658-listas-doblemente-enlazadas/">¿Cómo programar Listas Doblemente Enlazadas</a></li>
+            <br />
+            <div class="siguiente">
+              <p>Siguiente tema:</p>
+              <a href="/listCircular">Listas Circular y operaciones >></a>
+            </div>
         </div>
     </div>
     </section>

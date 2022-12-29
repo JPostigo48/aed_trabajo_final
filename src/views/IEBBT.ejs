@@ -16,15 +16,181 @@
         
         <div class="derecha">
             <div class="borde">
-            <center><h3>Estructura y diseño de una LSE</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <center><h3>Árboles Binarios: operaciones de inserción, eliminación y busqueda </h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
             <br>
-            <p>Una lista simplemente enlazada es una de las estructuras de datos fundamentales, y puede ser usada para implementar otras estructuras de datos. Consiste en una secuencia de nodos, en los que se guardan campos de datos arbitrarios y una o dos referencias (punteros) al nodo anterior o posterior. El principal beneficio de las listas enlazadas respecto a los array convencionales es que el orden de los elementos enlazados puede ser diferente al orden de almacenamiento en la memoria o el disco, permitiendo que el orden de recorrido de la lista sea diferente al de almacenamiento.</p>
+            <p>Los árboles binarios son una estructura de datos utilizada en la programación para almacenar y acceder a una colección de elementos de manera organizada. Cada elemento del árbol se conoce como un nodo y puede tener hasta dos hijos, lo que lo convierte en una estructura jerárquica.</p>
+
+            <center><img src="https://3.bp.blogspot.com/-1JDisiYxbqU/ULEww3UOo2I/AAAAAAAAAbk/wwbMX96cSH8/s1600/ARBOL+ABB.png"/></center>
+
+            <p>A continuación se presentan algunas de las principales operaciones que se pueden realizar con árboles binarios:</p>
+            
+            <h5>Inserción:</h5>
+            <p>Para insertar un elemento en un árbol binario, debes seguir los siguientes pasos:</p>
+            <li>Crea un nuevo nodo con el elemento que deseas insertar.</li>
+            <li>Si el árbol está vacío, el nuevo nodo se convierte en la raíz del árbol.</li>
+            <li>Si el árbol no está vacío, comienza a recorrer el árbol desde la raíz hasta encontrar un lugar donde insertar el nuevo nodo.</li>
+            <li>Compara el valor del nuevo nodo con el valor de cada nodo que encuentras mientras recorres el árbol. Si el valor del nuevo nodo es menor que el valor del nodo actual, continúa recorriendo el árbol hacia la izquierda. Si el valor del nuevo nodo es mayor, continúa recorriendo el árbol hacia la derecha.</li>
+            <li>Cuando encuentres un nodo cuyo hijo izquierdo o derecho esté vacío, inserta el nuevo nodo en esa posición.</li>
+
+            <div class="panel-body">
+                <pre>
+                    <ol>
+                        <li>class BinaryTree {</li>
+                            <li></li>
+                            <li>private:</li>
+                            <li>    struct TreeNode {</li>
+                            <li>        int data;</li>
+                            <li>        TreeNode* left;</li>
+                            <li>        TreeNode* right;</li>
+                            <li>    };</li>
+                            <li>    TreeNode* root;</li>
+                            <li></li>
+                            <li>    void insert(TreeNode*&, int);</li>
+                            <li></li>
+                            <li>public:</li>
+                            <li>    BinaryTree() { root = NULL; }</li>
+                            <li>    void insert(int data) { insert(root, data); }</li>
+                            <li>};</li>
+                            <li></li>
+                            <li>void BinaryTree::insert(TreeNode*& node, int data) {</li>
+                            <li>    if (node == NULL) {</li>
+                            <li>        node = new TreeNode;</li>
+                            <li>        node-&gt;data = data;</li>
+                            <li>        node-&gt;left = node-&gt;right = NULL;</li>
+                            <li>    }</li>
+                            <li>    else if (data &lt; node-&gt;data) {</li>
+                            <li>        insert(node-&gt;left, data);</li>
+                            <li>    }</li>
+                            <li>    else {</li>
+                            <li>        insert(node-&gt;right, data);</li>
+                            <li>    }</li>
+                            <li>}</li>                            
+                    </ol>
+                </pre>
+            </div>
+
+
+            <h5>Eliminación:</h5>
+            <p>Para eliminar un elemento de un árbol binario, debes seguir los siguientes pasos:</p>
+            <li>Comienza a recorrer el árbol desde la raíz hasta encontrar el nodo que deseas eliminar.</li>
+            <li>Una vez que encuentres el nodo a eliminar, verifica cuántos hijos tiene. Si el nodo no tiene hijos, simplemente lo eliminas y enlazas el padre del nodo con null.</li>
+            <li>Si el nodo tiene un hijo, enlaza el padre del nodo con el hijo del nodo y elimina el nodo.</li>
+            <li>Si el nodo tiene dos hijos, reemplázalo con el nodo más a la derecha del subárbol izquierdo o con el nodo más a la izquierda del subárbol derecho, dependiendo de la implementación del árbol. Luego elimina el nodo original.</li>
+
+            <div class="panel-body">
+                <pre>
+                    <ol>
+                        <li>class BinaryTree {</li>
+                            <li></li>
+                            <li>private:</li>
+                            <li>    struct TreeNode {</li>
+                            <li>        int data;</li>
+                            <li>        TreeNode* left;</li>
+                            <li>        TreeNode* right;</li>
+                            <li>    };</li>
+                            <li>    TreeNode* root;</li>
+                            <li></li>
+                            <li>    void remove(TreeNode*&, int);</li>
+                            <li></li>
+                            <li>public:</li>
+                            <li>    BinaryTree() { root = NULL; }</li>
+                            <li>    void remove(int data) { remove(root, data); }</li>
+                            <li>};</li>
+                            <li></li>
+                            <li>void BinaryTree::remove(TreeNode*& node, int data) {</li>
+                            <li>    if (node == NULL) {</li>
+                            <li>        return;</li>
+                            <li>    }</li>
+                            <li>    if (data &lt; node-&gt;data) {</li>
+                            <li>        remove(node-&gt;left, data);</li>
+                            <li>    }</li>
+                            <li>    else if (data &gt; node-&gt;data) {</li>
+                            <li>        remove(node-&gt;right, data);</li>
+                            <li>    }</li>
+                            <li>    else {</li>
+                            <li>        if (node-&gt;left == NULL && node-&gt;right == NULL) {</li>
+                            <li>            delete node;</li>
+                            <li>            node = NULL;</li>
+                            <li>        }</li>
+                            <li>        else if (node-&gt;left == NULL) {</li>
+                            <li>            TreeNode* temp = node;</li>
+                            <li>            node = node-&gt;right;</li>
+                            <li>            delete temp;</li>
+                            <li>        }</li>
+                            <li>        else if (node-&gt;right == NULL) {</li>
+                            <li>            TreeNode* temp = node;</li>
+                            <li>            node = node-&gt;left;</li>
+                            <li>            delete temp;</li>
+                            <li>        }</li>
+                            <li>        else {</li>
+                            <li>            TreeNode* temp = node-&gt;right;</li>
+                            <li>            while (temp-&gt;left != NULL) {</li>
+                            <li>                temp = temp-&gt;left;</li>
+                            <li>            }</li>
+                            <li>            node-&gt;data = temp-&gt;data;</li>
+                            <li>            remove(node-&gt;right, temp-&gt;data);</li>
+                            <li>        }</li>
+                            <li>    }</li>
+                            <li>}</li>                            
+                    </ol>
+                </pre>
+            </div>
+
+            <h5>Buscar:</h5>
+            <p>Para buscar un elemento en un árbol binario, debes seguir los siguientes pasos:</p>
+            <li>Comienza a recorrer el árbol desde la raíz.</li>
+            <li>Compara el valor del elemento que estás buscando con el valor del nodo actual. Si son iguales, has encontrado el elemento y puedes detener la búsqueda.</li>
+            <li>Si el valor del elemento que estás buscando es menor que el valor del nodo actual, continúa recorriendo el árbol hacia la izquierda. Si el valor del elemento que estás buscando es mayor, continúa recorriendo el árbol hacia la derecha.</li>
+            <li>Repite el proceso hasta encontrar el elemento o hasta llegar a un nodo que sea null, lo que significa que el elemento no se encuentra en el árbol.</li>
+
+            <div class="panel-body">
+                <pre>
+                    <ol>
+                        <li>class BinaryTree {</li>
+                            <li></li>
+                            <li>private:</li>
+                            <li>    struct TreeNode {</li>
+                            <li>        int data;</li>
+                            <li>        TreeNode* left;</li>
+                            <li>        TreeNode* right;</li>
+                            <li>    };</li>
+                            <li>    TreeNode* root;</li>
+                            <li></li>
+                            <li>    bool search(TreeNode*, int);</li>
+                            <li></li>
+                            <li>public:</li>
+                            <li>    BinaryTree() { root = NULL; }</li>
+                            <li>    bool search(int data) { return search(root, data); }</li>
+                            <li>};</li>
+                            <li></li>
+                            <li>bool BinaryTree::search(TreeNode* node, int data) {</li>
+                            <li>    if (node == NULL) {</li>
+                            <li>        return false;</li>
+                            <li>    }</li>
+                            <li>    if (node-&gt;data == data) {</li>
+                            <li>        return true;</li>
+                            <li>    }</li>
+                            <li>    if (data &lt; node-&gt;data) {</li>
+                            <li>        return search(node-&gt;left, data);</li>
+                            <li>    }</li>
+                            <li>    else {</li>
+                            <li>        return search(node-&gt;right, data);</li>
+                            <li>    }</li>
+                            <li>}</li>                            
+                    </ol>
+                </pre>
+            </div>
 
             
             <p>Link de apoyo</p>
-            <li><a href="https://blog.martincruz.me/2012/10/listas-enlazadas-simples-en-c.html">Implementación en C++</a></li>
-            <li><a href="https://www.techiedelight.com/es/linked-list-implementation-cpp/">Implementación de listas enlazadas en C++</a></li>            
-            <li><a href="http://programacionparacoccidio.blogspot.com/2013/01/listas-enlazadas-en-c-orientado-objetos.html">Listas Enlazadas en C++ Orientado a Objetos</a></li>
+            <li><a href="https://www.programacion.com.py/escritorio/c/arboles-en-c">Arboles en C++</a></li>
+            <li><a href="https://blog.martincruz.me/2012/11/arboles-binarios-de-busqueda-c.html">Árboles Binarios de Búsqueda en C++</a></li>
+
+            <br />
+            <div class="siguiente">
+              <p>Siguiente tema:</p>
+              <a href="/othersBT">Árboles Binarios: otras operaciones >></a>
+            </div>
         </div>
     </div>
     </section>

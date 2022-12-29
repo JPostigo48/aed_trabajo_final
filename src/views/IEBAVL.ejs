@@ -16,15 +16,90 @@
         
         <div class="derecha">
             <div class="borde">
-            <center><h3>Estructura y diseño de una LSE</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <center><h3>Árboles AVL: operaciones</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
             <br>
-            <p>Una lista simplemente enlazada es una de las estructuras de datos fundamentales, y puede ser usada para implementar otras estructuras de datos. Consiste en una secuencia de nodos, en los que se guardan campos de datos arbitrarios y una o dos referencias (punteros) al nodo anterior o posterior. El principal beneficio de las listas enlazadas respecto a los array convencionales es que el orden de los elementos enlazados puede ser diferente al orden de almacenamiento en la memoria o el disco, permitiendo que el orden de recorrido de la lista sea diferente al de almacenamiento.</p>
+            <p>Los árboles AVL son un tipo de árbol binario de búsqueda que se autobalancea para mantener una altura óptima y garantizar una complejidad de tiempo de inserción, eliminación y búsqueda de O(log n). Esto significa que, incluso si se insertan o eliminan muchos elementos del árbol, la altura del árbol seguirá siendo logarítmica en función del número de nodos, lo que garantiza un rendimiento rápido para estas operaciones.</p>
+            <p>Para garantizar el balance del árbol, cada nodo del árbol AVL tiene un factor de balance, que es la diferencia entre la altura de su hijo izquierdo y su hijo derecho. Si el factor de balance de un nodo es mayor que 1 o menor que -1, se realiza una rotación en el árbol para equilibrarlo.</p>
+
+            <center>
+                <img src="http://163.10.22.82/OAS/AVL_Definicion/arbolG1.png" />
+            </center>
+            
+            <h5>Inserción:</h5>
+            <p>Para insertar un elemento en un árbol AVL, debes seguir los mismos pasos que para insertar en un árbol binario de búsqueda. Después de insertar el elemento, debes ajustar el factor de balance de cada nodo a lo largo del camino desde la raíz hasta el nodo insertado. Si el factor de balance de un nodo es mayor que 1 o menor que -1 después de la inserción, debes realizar una rotación en el árbol para equilibrarlo.</p>
 
             
+            <div class="panel-body">
+                <pre>
+                    <ol>
+                        <li>// Estructura de nodo para árbol AVL</li>
+<li>struct Node {</li>
+<li>  int key;</li>
+<li>  int balance;</li>
+<li>  Node *left;</li>
+<li>  Node *right;</li>
+<li></li>
+<li>  Node(int k) : key(k), balance(0), left(nullptr), right(nullptr) {}</li>
+<li>};</li>
+<li></li>
+<li>// Clase para árbol AVL</li>
+<li>class AVLTree {</li>
+<li> public:</li>
+<li>  // Constructor</li>
+<li>  AVLTree() : root_(nullptr) {}</li>
+<li></li>
+<li>  // Método para insertar un elemento en el árbol</li>
+<li>  void Insert(int key) {</li>
+<li>    root_ = Insert(root_, key);</li>
+<li>  }</li>
+<li></li>
+<li> private:</li>
+<li>  // Método recursivo para insertar un elemento en el árbol</li>
+<li>  Node* Insert(Node* node, int key) {</li>
+<li>    // Caso base: si el nodo es null, insertamos el elemento aquí</li>
+<li>    if (node == nullptr) {</li>
+<li>      return new Node(key);</li>
+<li>    }</li>
+<li></li>
+<li>    // Si el elemento es menor que el nodo actual, lo insertamos en el hijo izquierdo</li>
+<li>    if (key &lt; node-&gt;key) {</li>
+<li>      node-&gt;left = Insert(node-&gt;left, key);</li>
+<li>    } else {  // Si el elemento es mayor o igual, lo insertamos en el hijo derecho</li>
+<li>      node-&gt;right = Insert(node-&gt;right, key);</li>
+<li>    }</li>
+<li></li>
+<li>    // Actualizamos el factor de balance del nodo</li>
+<li>    UpdateBalance(node);</li>
+<li></li>
+<li>    // Si el factor de balance es mayor que 1 o menor que -1, realizamos una rotación para equilibrar el árbol</li>
+<li>    if (node-&gt;balance &gt; 1 || node-&gt;balance &lt; -1) {</li>
+<li>      node = Balance(node);</li>
+<li>    }</li>
+<li></li>
+<li>    // Devolvemos el nodo</li>
+<li>    return node;</li>
+<li>  }</li>
+<li>}</li>
+                    </ol>
+                </pre>
+            </div>
+
+            <h5>Eliminación:</h5>
+            <p>Para eliminar un elemento de un árbol AVL, debes seguir los mismos pasos que para eliminar en un árbol binario de búsqueda. Después de eliminar el elemento, debes ajustar el factor de balance de cada nodo a lo largo del camino desde la raíz hasta el nodo eliminado. Si el factor de balance de un nodo es mayor que 1 o menor que -1 después de la eliminación, debes realizar una rotación en el árbol para equilibrarlo.</p>
+
+
+            <h5>Búsqueda:</h5>
+            <p>Para buscar un elemento en un árbol AVL, debes seguir los mismos pasos que para buscar en un árbol binario de búsqueda. Esto significa que debes comparar el elemento que estás buscando con cada nodo del árbol mientras avanzas hacia abajo a través del árbol. Si el elemento que estás buscando es menor que el nodo actual, debes ir al hijo izquierdo del nodo; si es mayor, debes ir al hijo derecho. Continúas este proceso hasta encontrar el elemento o hasta llegar a un nodo vacío, lo que indica que el elemento no se encuentra en el árbol.</p>
+            <p>La complejidad de la búsqueda en un árbol AVL es O(log n), ya que la altura del árbol es logarítmica en función del número de nodos. Esto significa que, incluso si el árbol tiene muchos nodos, la búsqueda será rápida y eficiente.</p>
+
             <p>Link de apoyo</p>
-            <li><a href="https://blog.martincruz.me/2012/10/listas-enlazadas-simples-en-c.html">Implementación en C++</a></li>
-            <li><a href="https://www.techiedelight.com/es/linked-list-implementation-cpp/">Implementación de listas enlazadas en C++</a></li>            
-            <li><a href="http://programacionparacoccidio.blogspot.com/2013/01/listas-enlazadas-en-c-orientado-objetos.html">Listas Enlazadas en C++ Orientado a Objetos</a></li>
+            <li><a href="http://163.10.22.82/OAS/AVL_Definicion/definicin.html">Definición de los árboles AVL</a></li>
+
+            <br />
+            <div class="siguiente">
+              <p>Siguiente tema:</p>
+              <a href="/IEBRB">Red Black: operaciones >></a>
+            </div>
         </div>
     </div>
     </section>
