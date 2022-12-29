@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Arboles Digitales</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            
+            <br>
+            <p>Los árboles digitales son estructuras de datos que se utilizan para almacenar y recuperar datos de manera eficiente. Se llaman "digitales" porque se utilizan a menudo para almacenar datos digitales, como números o caracteres.</p>
+            <br>
+            <p>Hay muchos tipos diferentes de árboles digitales, cada uno con sus propias características y usos específicos. Algunos ejemplos comunes de árboles digitales incluyen árboles binarios de búsqueda, árboles de búsqueda rojinegros y árboles Patricia.</p>
+            <br>
+            <p>Los árboles digitales son muy útiles porque permiten acceder a los datos de manera rápida y eficiente. Por ejemplo, en un árbol binario de búsqueda, se puede buscar un elemento en el árbol en tiempo logarítmico promedio, lo que significa que el tiempo de búsqueda aumenta de manera relativamente lenta a medida que el árbol crece más grande. Esto es mucho más rápido que la búsqueda secuencial de elementos en una lista simple, donde se debe comparar cada elemento de manera secuencial hasta encontrar el elemento deseado.</p>
+            <br>
+            <p>Los árboles digitales también son útiles porque permiten insertar y eliminar elementos de manera eficiente. Por ejemplo, en un árbol binario de búsqueda, se puede insertar un elemento en el árbol en tiempo logarítmico promedio, y se puede eliminar un elemento del árbol en tiempo logarítmico promedio. Esto es mucho más rápido que insertar o eliminar elementos de una lista simple, donde se debe recorrer toda la lista para encontrar la posición adecuada o para eliminar un elemento en particular.</p>
+            <br>
+            <center>
+                <img src="https://opendatastructures.org/ods-cpp/img5694.png" width="550">
+            </center>
+            <br>
+            <h3>Implementacion de un arbol digital</h3>
+            <br>
+            <pre>
+                #include < iostream>
+
+                    // Un nodo del árbol BST contiene un valor y dos hijos
+                    struct BSTNode {
+                      int value;
+                      BSTNode* left;
+                      BSTNode* right;
+                    };
+                    
+                    // La clase BST representa el árbol BST completo
+                    class BST {
+                     public:
+                      BST() : root_(nullptr) {}
+                    
+                      // Inserta un elemento en el árbol BST
+                      void insert(int value) {
+                        BSTNode* node = new BSTNode;
+                        node->value = value;
+                        node->left = node->right = nullptr;
+                    
+                        if (root_ == nullptr) {
+                          root_ = node;
+                        } else {
+                          BSTNode* current = root_;
+                          while (true) {
+                            if (value < current->value) {
+                              // El valor de inserción es menor que el valor del nodo actual, sigue el camino izquierdo
+                              if (current->left == nullptr) {
+                                current->left = node;
+                                break;
+                              }
+                              current = current->left;
+                            } else {
+                              // El valor de inserción es mayor o igual que el valor del nodo actual, sigue el camino derecho
+                              if (current->right == nullptr) {
+                                current->right = node;
+                                break;
+                              }
+                              current = current->right;
+                            }
+                          }
+                        }
+                      }
+                    
+                      // Busca un elemento en el árbol BST
+                      bool search(int value) {
+                        BSTNode* current = root_;
+                        while (current != nullptr) {
+                          if (value == current->value) {
+                            // Se encontró el elemento
+                            return true;
+                          } else if (value < current->value) {
+                            // El valor de búsqueda es menor que el valor del nodo actual, sigue el camino izquierdo
+                            current = current->left;
+                          } else {
+                            // El valor de búsqueda es mayor que el valor del nodo actual, sigue el camino derecho
+                            current = current->right;
+                          }
+                        }
+                        // No se encontró el elemento
+                        return false;
+                      }
+                    
+                     private:
+                      BSTNode* root_;
+                    };
+                    
+                    int main() {
+                      BST tree;
+                    
+                      // Inserta algunos elementos en el árbol
+                      tree.insert(5);
+                      tree.insert(3);
+                      tree.insert(8);
+                      tree.insert(1);
+                      tree.insert(4);
+                      tree.insert(7);
+                      tree.insert(10);
+                    
+                      // Busca algunos elementos en el árbol
+                      std::cout << tree.search(5) << std::endl;  // imprime 1 (se encontró el elemento)
+                      std::cout << tree.search(6) << std::endl;  // imprime 0 (no se encontró el
+            </pre>
+            <br>
+            <p>Link de apoyo</p>
+            <br>
+            <li><a href="https://opendatastructures.org/ods-cpp/13_1_digital_search_tree.html">A digital search tree</a></li>
+            
+        </div>
+</body>
+</html>

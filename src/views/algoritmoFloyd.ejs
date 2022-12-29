@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Algortimo de Floyd</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <h3>Historia</h3>
+            <br>
+            <p>Robert W. Floyd (8 de junio de 1936 - 25 de septiembre de 2001) fue un prominente científico estadounidense en informática.
+
+                Nacido en Nueva York, Floyd culminó el bachillerato a los 14 años. Se graduó en la Universidad de Chicago en 1953 a los 17 años y como Físico en 1958.
+                
+                Operador de computadoras en los años 60, publicó sus primeros artículos los cuales fueron de gran influencia y fue nombrado profesor asociado en la Universidad de Carnegie Mellon. Seis años más tarde fue nombrado profesor en la Universidad de Stanford.
+                
+                Entre sus contribuciones se encuentran el diseño y análisis de algoritmos eficientes para encontrar el camino más corto en un grafo y para el problema de reconocimiento de frases, pero probablemente su logro más importante fue el ser pionero, con su artículo de 1967 «Assigning Meanings to Programs», en el área de verificación de programas utilizando aserciones lógicas, donde aparece la importante noción de invariante, esencial para demostrar propiedades de programas iterativos.
+                
+                Floyd recibió el Premio Turing de la ACM en 1978 «por tener una clara influencia en las metodologías para la creación de software eficiente y confiable, y por haber contribuido a la fundación de las subáreas teoría del reconocimiento de frases, semántica de los lenguajes de programación, verificación automatizada de programas, síntesis automatizada de programas y análisis de algoritmos».</p>
+            <br>
+            <center>
+              <img src="https://cs.stanford.edu/sites/default/files/hhfffhcc.png" width="250">
+            </center>
+            <br>
+            <h3>Ventajas</h3>
+            <br>
+            <p>Encontrar el camino mas corto en una sola ejecución. Algoritmo que usa el método de programación dinámica.</p>
+            <br>
+            <p>El procedimiento principal y único para este proceso recorre la matriz tantas veces como nodos tenga el grafo. </p>
+            <br>
+            <h3>Analisis</h3>
+            <br>
+            <p>1.Creamos dos matrices a la primera la denominaremos matriz ponderada y a la segunda matriz recorrido .</p>
+            <br>
+            <p>2. En la matriz Ponderada , empezamos a ingresar los valores de acuerdo al peso de cada arista , cuando no existe relación entre dos nodos su valor será infinito , la diagonal de la matriz siempre será nula .</p>
+            <br>
+            <p>3. Para llenar la tabla de recorrido se llena con el valor de su columna , en todas las columnas  inicialmente.</p>
+            <br>
+            <p>Debemos evaluar las relaciones o la suma  evaluamos las columnas de  la A–E  . Respecto a las Filas de A-E ), de la tabla de ponderaciones a  la tabla de recorridos  , para poder editar  las dos tablas.
+
+                Solo podemos evaluar los campos que ya cuenten con un valor de peso en la arista , en el primer caso podemos evidenciar  que solo podemos evaluar en la columna de A , el numero 6 , respecto a la Fila de A .
+                
+                Para tener en cuenta el cambio la suma debe ser menor al valor de la ponderación</p>
+            <br>
+            <p>El cambio debemos realizarlo en la tabla de recorrido de igual forma y colocamos el nodo el cual estamos evaluando</p>
+            <br>
+            <center>
+                <img src="https://static.wixstatic.com/media/eade1a_deb2c2000bf2403e98aa77acd191a292.jpg" width="300">
+            </center>
+            <br>
+            <h3>Implementacion en C++</h3>
+            <br>
+            <pre>
+                // Declaraciones en el archivo .h
+                int cn; //cantidad de nodos
+                vector< vector< int> > ady;
+
+                // Devuelve una matriz con las distancias mínimas de cada nodo al resto de los vértices.
+                vector< vector< int> > Grafo :: floydWarshall(){
+                    vector< vector< int> > path = this->ady;
+
+                    /* No tendría porqué ser necesario si ya hay ceros en las diagonales de ady */
+                    for(int i = 0; i < cn; i++)
+                        path[i][i] = 0;
+                    
+                    for(int k = 0; k < cn; k++)
+                        for(int i = 0; i < cn; i++)
+                            for(int j = 0; j < cn; j++){
+                                int dt = path[i][k] + path[k][j];
+                                if(path[i][j] > dt)
+                                    path[i][j] = dt;
+                            }
+                    
+                    return path;
+                }
+            </pre>
+            <br>
+            <p>Link de apoyo</p>
+            <br>
+            <li><a href="https://es.wikipedia.org/wiki/Robert_W._Floyd">Historia de Robert W. Floyd</a></li>
+            <br>
+            <li><a href="http://miblogestructurasdedatos.blogspot.com/p/algoritmo-de-floyd-algoritmo-de-floyd.html">Explicacion del Algoritmo de Floyd</a></li>  
+            <br>         
+            <li><a href="https://es.wikipedia.org/wiki/Algoritmo_de_Floyd-Warshall#:~:text=En%20informática%2C%20el%20algoritmo%20de,vértices%20en%20una%20única%20ejecución.">Algoritmo de Floyd-Warshall</a></li>
+        </div>
+    </section>
+</body>
+</html>

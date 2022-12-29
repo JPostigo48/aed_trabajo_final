@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Orden Topológico</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <br>
+            <p>Una ordenación topológica (topological sort, topological ordering, topsort o toposort en inglés) de un grafo acíclico dirigido G es una ordenación lineal de todos los nodos de G que satisface que si G contiene la arista dirigida uv entonces el nodo u aparece antes del nodo v. La condición que el grafo no contenga ciclos es importante, ya que no se puede obtener ordenación topológica de grafos que contengan ciclos.</p>
+            <br>
+            <p>Usualmente, para clarificar el concepto se suelen identificar los nodos con tareas a realizar en la que hay una precedencia a la hora de ejecutar dichas tareas. La ordenación topológica por tanto es una lista en orden lineal en que deben realizarse las tareas.</p>
+            <br>
+            <p>Para poder encontrar la ordenación topológica del grafo G deberemos aplicar una modificación del algoritmo de búsqueda en profundidad (DFS).</p>
+            <br>
+            <h3>Algoritmos</h3>
+            <br>
+            <p>Los algoritmos usuales para el ordenamiento topológico tienen un tiempo de ejecución de la cantidad de nodos más la cantidad de aristas (O(|V|+|E|)).</p>
+            <br>
+            <p>Uno de los algoritmos, primero descrito por Kahn (1962), trabaja eligiendo los vértices del mismo orden como un eventual orden topológico. Primero, busca la lista de los "nodos iniciales" que no tienen arcos entrantes y los inserta en un conjunto S; donde al menos uno de esos nodos existe si el grafo es acíclico. Entonces:</p>
+            <br>
+            <pre>
+                L ← Lista vacía que contendrá luego los elementos ordenados.
+                S ← Conjunto de todos los nodos sin aristas entrantes.
+
+                MIENTRAS [S no es vacío]:
+                    n ← nodo extraído de S
+                    insertar n en L
+
+                    PARA CADA [nodo m con arista e de n a m]:
+                        Eliminar arista e del grafo
+
+                        SI [m no tiene más aristas entrantes]:
+                            insertar m en S
+
+                SI [el grafo tiene más aristas]:
+                    error: el grafo tiene al menos un ciclo
+                SINO:
+                    RETORNAR L
+            </pre>
+            <br>
+            <p>Si respeta la definición de GAD, ésta es una solución posible, listada en L (no es la única solución). De lo contrario el grafo contiene al menos un ciclo y por lo tanto un ordenamiento topológico es imposible.</p>
+            <br>
+            <p>Ha de tenerse en cuenta que, debido a la falta de unicidad del orden resultante, la estructura S puede ser simplemente un conjunto, una cola o una pila.</p>
+            <br>
+            <p>Una alternativa al algoritmo visto para ordenamiento topológico está basado en DFS (del inglés búsqueda en profundidad). Para este algoritmo, las aristas están en dirección contraria al algoritmo anterior (y en dirección contraria a lo que muestra el diagrama del ejemplo). Hay un arco desde x a y si la tarea x depende de la tarea y (en otras palabras, si la tarea y debe completarse antes que la tarea x empiece). El algoritmo se repite a través de cada nodo del grafo, en un orden arbitrario, iniciando una búsqueda en profundidad que termina cuando llega a un nodo que ya ha sido visitado desde el comienzo del orden topológico.</p>
+            <br>
+            <p>La ordenación topológica no es única. Depende en qué orden recorras los nodos del grafo en el bucle for de la función ORDENACIÓN_TOPOLÓGICA. La nomenclatura adicional utilizada es: lista = Estructura de datos lista enlazada</p>
+            <br>
+            <pre>
+                ORDENACIÓN_TOPOLÓGICA(grafo G)
+                for each vértice u ∈ V[G]do
+                        estado[u] = NO_VISITADO
+                        padre[u] = NULL
+                tiempo =0
+                for each vértice u ∈ V[G]do
+                        if estado[u] = NO_VISITADO then
+                                TOPOLÓGICO-Visitar(u)
+            </pre>
+            <br>
+            <pre>
+                TOPOLÓGICO-Visitar(nodo u)
+                estado[u]=VISITADO
+                tiempo = tiempo+1
+                distancia[u] = tiempo
+                for each v ∈ Adyacencia[u] do
+                        if estado[v]=NO_VISITADO then
+                                padre[v]=u
+                                TOPOLÓGICO-Visitar(v)
+                estado[u] = TERMINADO
+                tiempo = tiempo+1
+                finalización[u] = tiempo
+                insertar (lista, u)
+            </pre>
+            <br>
+            <p>Al final de la ejecución del algoritmo se devuelve la lista enlazada de nodos, que corresponde con la ordenación topológica del grafo .</p>
+            <br>
+            <h3>Ejemplo</h3>
+            <br>
+            <p>1. Ejecutamos el algoritmo ORDENACIÓN_TOPOLÓGICA (grafo G) sobre el siguiente grafo.</p>
+            <br>
+            <center>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Grafo_sot.jpg" width="600">
+            </center>
+            <br>
+            <p>2. El algoritmo nos devuelve una lista enlazada con los nodos del grafo en orden decreciente en tiempo de finalización.</p>
+            <br>
+            <center>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Grafo_cot.jpg" width="800">
+            </center>
+            <br>
+            <p>Link de apoyo</p>
+            <br>
+            <li><a href="https://compdiscretas.wordpress.com/2012/11/18/3-3-ordenamientos-topologicos/"> ORDENAMIENTOS TOPOLÓGICOS</a></li>
+            <br>
+            <li><a href="https://hmong.es/wiki/Topological_sorting">Clasificación topológica</a></li>
+            <br>           
+            <li><a href="https://nanopdf.com/download/ordenacion-topologica-mediante-algoritmos-de-grafos-1-introduccion-2_pdf">ORDENACIÓN TOPOLOGICA MEDIANTE ALGORITMOS DE GRAFOS</a></li>
+        </div>
+    </section>
+</body>
+</html>

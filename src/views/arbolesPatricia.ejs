@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Arboles Patricia </h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <br>
+            <p>Un árbol Patricia es una estructura de datos que se utiliza para almacenar y buscar claves de manera eficiente. Se utiliza a menudo en sistemas de bases de datos y en aplicaciones de búsqueda de texto.</p>
+            <br>
+            <p>Un árbol Patricia se basa en un árbol binario, pero en lugar de utilizar una clave completa para determinar la ubicación de un elemento en el árbol, utiliza solo una porción de la clave. Cada nodo del árbol Patricia contiene una clave parcial y una lista de hijos, y cada hijo se asocia con una porción adicional de la clave. Al buscar un elemento en el árbol, se comparan las claves parciales en cada nodo con la clave de búsqueda y se sigue el camino adecuado hacia abajo en el árbol hasta encontrar el elemento deseado.</p>
+            <br>
+            <p>Un árbol Patricia es muy eficiente para la búsqueda de claves, ya que puede hacer coincidir rápidamente una clave con el nodo correcto en el árbol utilizando solo una porción de la clave. Además, al utilizar solo una porción de la clave en cada nodo, los árboles Patricia son más compactos que otros árboles y pueden almacenar grandes cantidades de datos en poco espacio.</p>
+            <br>
+            <center>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Patricia_trie.svg/1200px-Patricia_trie.svg.png" width="400">
+            </center>
+            <br>
+            <h3>Implementacion del Arbol Patricia en C++</h3>
+            <br>
+            <pre>
+                #include < iostream>
+                    #include < string>
+                    
+                    // Un nodo del árbol Patricia contiene una clave parcial y una lista de hijos
+                    struct PatriciaNode {
+                      std::string key;
+                      PatriciaNode* children[2];
+                    };
+                    
+                    // La clase PatriciaTree representa el árbol Patricia completo
+                    class PatriciaTree {
+                     public:
+                      PatriciaTree() : root_(nullptr) {}
+                    
+                      // Inserta un elemento en el árbol Patricia con una clave dada
+                      void insert(const std::string& key, int value) {
+                        PatriciaNode* node = new PatriciaNode;
+                        node->key = key;
+                        node->children[0] = node->children[1] = nullptr;
+                    
+                        if (root_ == nullptr) {
+                          root_ = node;
+                        } else {
+                          PatriciaNode* current = root_;
+                          while (true) {
+                            // Compara la clave del nodo actual con la clave de inserción
+                            int cmp = key.compare(current->key);
+                            if (cmp == 0) {
+                              // La clave ya existe en el árbol, sobreescribe el valor
+                              break;
+                            } else if (cmp < 0) {
+                              // La clave de inserción es menor que la clave del nodo actual, sigue el camino izquierdo
+                              if (current->children[0] == nullptr) {
+                                current->children[0] = node;
+                                break;
+                              }
+                              current = current->children[0];
+                            } else {
+                              // La clave de inserción es mayor que la clave del nodo actual, sigue el camino derecho
+                              if (current->children[1] == nullptr) {
+                                current->children[1] = node;
+                                break;
+                              }
+                              current = current->children[1];
+                            }
+                          }
+                        }
+                      }
+                    
+                      // Busca un elemento en el árbol Patricia con una clave dada
+                      int search(const std::string& key) {
+                        PatriciaNode* current = root_;
+                        while (current != nullptr) {
+                          // Compara la clave del nodo actual con la clave de búsqueda
+                          int cmp = key.compare(current->key);
+                          if (cmp == 0) {
+                            // Se encontró el elemento
+                            return current->value;
+                          } else {
+                            // Sigue el camino adecuado hacia abajo en el árbol
+                            current = current->children[cmp < 0 ? 0 : 1];
+                          }
+                        }
+                        // No se encontró el elemento
+                        return -1;
+                      }
+                    
+                     private:
+                      PatriciaNode* root_;
+                    };
+            </pre>
+
+            <p>Link de apoyo</p>
+            <br>
+            <li><a href="http://webdiis.unizar.es/asignaturas/TAP/material/2.4.digitales.pdf">Analisis de Arboles Patricia</a></li>
+            <br>
+            <li><a href="https://www.geeksforgeeks.org/implementing-patricia-trie-in-java/">Implementacion de Arbol Patricia en Java/a></li>
+            <br>           
+            <li><a href="https://www.codeproject.com/Articles/9497/Patricia-Trie-Template-Class">Patricia Trie Template Class</a></li>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Árboles B,B+ y B y operaciones</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <br>
+            <h3>Árbol-B</h3>
+            <br>
+            <p>En las ciencias de la computación, los árboles-B o B-árboles son estructuras de datos de árbol que se encuentran comúnmente en las implementaciones de bases de datos y sistemas de archivos. Al igual que los árboles binarios de búsqueda, son árboles balanceados de búsqueda, pero cada nodo puede poseer más de dos hijos. Los árboles B mantienen los datos ordenados y las inserciones y eliminaciones se realizan en tiempo logarítmico amortizado.</p>
+            <br>
+            <center>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/B-tree_example.svg/400px-B-tree_example.svg.png" width="500">
+            </center>
+            <br>
+            <p>La idea tras los árboles-B es que los nodos internos deben tener un número variable de nodos hijo dentro de un rango predefinido. Cuando se inserta o se elimina un dato de la estructura, la cantidad de nodos hijo varía dentro de un nodo. Para que siga manteniéndose el número de nodos dentro del rango predefinido, los nodos internos se juntan o se parten. Dado que se permite un rango variable de nodos hijo, los árboles-B no necesitan rebalancearse tan frecuentemente como los árboles binarios de búsqueda auto-balanceables. Pero, por otro lado, pueden desperdiciar memoria, porque los nodos no permanecen totalmente ocupados. Los límites (uno superior y otro inferior) en el número de nodos hijo son definidos para cada implementación en particular. Por ejemplo, en un árbol-B 2-3 (A menudo simplemente llamado árbol 2-3 ), cada nodo sólo puede tener 2 o 3 nodos hijos.</p>
+            <br>
+            <h3>Clase nodo Arbol B en C++</h3>
+            <br>
+            <pre>
+                #define TAMANO 1000
+
+                struct stclave {
+                    int valor;
+                    long registro;
+                };
+
+                class bnodo {
+                public:
+                    bnodo (int nClaves); // Constructor
+                    ~bnodo ();           // Destructor
+
+                private:
+                    int clavesUsadas;    
+                    stclave *clave;      
+                    bnodo **puntero;     
+                    bnodo *padre;        
+
+                friend class btree;
+                };
+            </pre>
+            <br>
+            <h3>Operaciones</h3>
+            <br>
+            <p>Busqueda</p>
+            <br>
+            <pre>
+                1. Situarse en el nodo raíz.
+                2. (*) Comprobar si contiene la clave a buscar.
+                    1. Encontrada fin de procedimiento.
+                    2. No encontrada:
+                        1. Si es hoja no existe la clave.
+                        2. En otro caso el nodo actual es el hijo que corresponde:
+                            1. La clave a buscar k < k1: hijo izquierdo.
+                            2. La clave a buscar k > ki y k < ki+1 hijo iésimo.
+                            3. Volver a paso 2(*).
+            </pre>
+            <br>
+            <p>Insercion</p>
+            <br>
+            <pre>
+                1. Realizando una búsqueda en el árbol, se halla el nodo hoja en el cual debería ubicarse el nuevo elemento.
+                2. Si el nodo hoja tiene menos elementos que el máximo número de elementos legales, entonces hay lugar para uno más. Inserte el nuevo elemento en el nodo, respetando el orden de los elementos.
+                3. De otra forma, el nodo debe ser dividido en dos nodos. La división se realiza de la siguiente manera:
+                    1. Se escoge el valor medio entre los elementos del nodo y el nuevo elemento.
+                    2. Los valores menores que el valor medio se colocan en el nuevo nodo izquierdo, y los valores mayores que el valor medio se colocan en el nuevo nodo derecho; el valor medio actúa como valor separador.
+                    3. El valor separador se debe colocar en el nodo padre, lo que puede provocar que el padre sea dividido en dos, y así sucesivamente.
+            </pre>
+            <br>
+            <p>Eliminación</p>
+            <br>
+            <p>* localizar y eliminar el elemento, y luego corregir, o</p>
+            <br>
+            <p>* hacer una única pasada de arriba abajo por el árbol, pero cada vez que se visita un nodo, reestructurar el árbol para que cuando se encuentre el elemento a ser borrado, pueda eliminarse sin necesidad de continuar reestructurando</p>
+            <br>
+            <br>
+            <h3>Árbol-B+</h3>
+            <br>
+            <p>En ciencias de la computación, un árbol B+ es un tipo de estructura de datos de árbol, representa una colección de datos ordenados de manera que se permite una inserción y borrado eficientes de elementos. Es un índice, multinivel, dinámico, con un límite máximo y mínimo en el número de claves por nodo. Un árbol B+ es una variación de un árbol B.</p>
+            <br>
+            <p>En ciencias de la computación, un árbol B+ es un tipo de estructura de datos de árbol, representa una colección de datos ordenados de manera que se permite una inserción y borrado eficientes de elementos. Es un índice, multinivel, dinámico, con un límite máximo y mínimo en el número de claves por nodo. Un árbol B+ es una variación de un árbol B.</p>
+            <br>
+            <p>Caracteristicas</p>
+            <br>
+            <p>* El número máximo de claves en un registro es llamado el orden del árbol B+.</p>
+            <br>
+            <p>* El mínimo número de claves por registro es la mitad del máximo número de claves. Por ejemplo, si el orden de un árbol B+ es n, cada nodo (exceptuando la raíz) debe tener entre n/2 y n claves.</p>
+            <br>
+            <p>* El número de claves que pueden ser indexadas usando un árbol B+ está en función del orden del árbol y su altura.</p>
+            <br>
+            <center>
+                <img src="https://sites.google.com/site/tutoriasarboles/_/rsrc/1319046944528/arboles-b-y-b/arbolb%2B.gif" width="500">
+            </center>
+            <br>
+            <h3>Operaciones</h3>
+            <br>
+            <p>Insercion</p>
+            <br>
+            <p>La inserción en un árbol B* se realiza del mismo modo que en el árbol B, siempre y cuando el nodo tenga espacio para ser insertado. La diferencia está en el momento en que se va a insertar un elemento en un nodo que ya está lleno. Al igual que los arboles B la insercion se realiza en las hojas. </p>
+            <br>
+            <pre>
+                -Cuando se va a insertar en la raiz y esta llena crece la altura del arbol y se procede asi:
+                1.Insertar la clave como si realmente hubiera espacio.
+                2.Crear una nueva pagina que pasara a ser la raiz del arbol.
+                3.Dividir la pagina en dos partes equitativas y subir la mediana al nuevo nodo creado.
+                4.Las dos paginas creadas pasaran a ser respectivamente el lado izquierdo y derecho de la nueva pagina.
+            </pre>
+            <br>
+            <p>Eliminación</p>
+            <br>
+            <p>La eliminacion se realiza de la misma manera que en los arboles B siempre y cuando no altere el valor minimo de claves que debe de tener cada pagina.</p>
+            <br>
+            <h3>Árbol-B*</h3>
+            <br>
+            <p>Una estructura en árbol es un algorítmo que permite colocar y localizar claves y registros en una base de datos. El algoritmo localiza datos haciendo selecciones repetidas en puntos de decisión denominados nodos. Un nodo puede tener un mínimo de dos ramas (llamadas también hijos), o muchas docenas de ellas. La estructura es sencilla, pero en términos del número de nodos e hijos, un árbol puede ser gigante.</p>
+            <br>
+            <p>En un árbol, las clases se almacenan en locaciones denominada hojas. Este nombre deriva del hecho de que en los puntos finales del árbol siempre existirán claves. El punto de incio se denomina raíz. El máximo número de hijos por nodo se denomina el orden del árbol. El máximo número de operaciones de acceso requeridas para alcanzar una clave se denomina la altura. En algunos árboles, el orden es el mismo en todos los nodos y la altura es la misma para todas las claves. Se dice que este tipo de estructura está balanceada. Otro árboles pueden tener diferentes números de hijos por nodos y diferentes claves pueden estar a diferente altura. En esta caso se dice que el árbol tiene una estructura no balanceada o asimétrica.</p>
+            <br>
+            <center>
+                <img src="http://wiki.abcdonline.info/images/e/e1/Tree_structure.gif" width="500">
+            </center>
+            <br>
+            <p>Para realizar los procedimientos de árboles B* también se debe abordar la cuestión de dividir la raíz, la cual, por definición, nunca tiene hermanos. Si no existen hermanos, no es posible la división de dos a tres. Knuth sugiere permitir que la raíz crezca hasta un tamaño mayor que los demás nodos, de tal forma que, cuando se divida, pueda producir dos nodos cada uno lleno casi a las dos terceras partes. Esta sugerencia tiene la ventaja de asegurar que todos los nodos por debajo del nivel de la raíz se adhieren a las características de los árboles B*. Sin embargo, tiene la desventaja de requerir que los procedimientos sean capaces de manejar un nodo que sea de mayor tamaño que todos los demás. Otra solución es realizar la división de la raíz como una división convencional de uno a dos. Esta segunda solución evita cualquier lógica especial de manejo de nodos. Por otro lado, complica la eliminación, la redistribución y otros procedimientos que deben ser sensibles al número mínimo de llaves permitidas en un nodo. Tales procedimientos tendrían que ser capaces de reconocer que los nodos descendientes de la raíz legalmente pueden estar solo llenos.</p>
+            <br>
+
+            <p>Link de apoyo</p>
+            <br>
+            <li><a href="https://es.wikipedia.org/wiki/Árbol-B">Árbol-B</a></li>
+            <br>
+            <li><a href="https://es.wikipedia.org/wiki/Árbol_B%2B">Árbol B+</a></li>
+            <br>           
+            <li><a href="https://ccia.ugr.es/~jfv/ed1/tedi/cdrom/docs/arb_B2.htm">Árbol B*</a></li>
+        </div>
+    </section>
+</body>
+</html>

@@ -33,6 +33,19 @@ router.get("/tablaHashDensidad", (req, res) => {res.render("tablaHashDensidad");
 router.get("/tablaHashOperaciones", (req, res) => {res.render("tablaHashOperaciones");});
 
 
+
+router.get("/algoritmoWarshall", (req, res) => {res.render("algoritmoWarshall");});
+router.get("/algoritmoFloyd", (req, res) => {res.render("algoritmoFloyd");});
+router.get("/algoritmoDijkstra", (req, res) => {res.render("algoritmoDijkstra");});
+router.get("/arbolesExpansionMinima", (req, res) => {res.render("arbolesExpansionMinima");});
+router.get("/componentesFuertementeConexoz", (req, res) => {res.render("componentesFuertementeConexoz");});
+router.get("/ordenTopologico", (req, res) => {res.render("ordenTopologico");});
+router.get("/flujosMaximosMinimos", (req, res) => {res.render("flujosMaximosMinimos");});
+router.get("/coloreadoGrafos", (req, res) => {res.render("coloreadoGrafos");});
+router.get("/ArbolesB", (req, res) => {res.render("ArbolesB");});
+router.get("/arbolesPatricia", (req, res) => {res.render("arbolesPatricia");});
+router.get("/arbolesDigitales", (req, res) => {res.render("arbolesDigitales");});
+
 router.get("/", (req, res) => {res.render("index");});
 
 export default router;

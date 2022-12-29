@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Coloreado de Grafos</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <br>
+            <p>En Teoría de grafos, la coloración de grafos es un caso especial de etiquetado de grafos; es una asignación de etiquetas llamadas colores a elementos del grafo. De manera simple, una coloración de los vértices de un grafo tal que ningún vértice adyacente comparta el mismo color es llamado vértice coloración. Similarmente, una arista coloración asigna colores a cada arista tal que aristas adyacentes no compartan el mismo color, y una coloración de caras de un grafo plano a la asignación de un color a cada cara o región tal que caras que compartan una frontera común tengan colores diferentes. El vértice coloración es el punto de inicio de la coloración, y los otros problemas de coloreo pueden ser transformados a una versión con vértices. Por ejemplo, una arista coloración de un grafo es justamente una vértice coloración del grafo línea respectivo, y una coloración de caras de un grafo plano es una vértice coloración del grafo dual.</p>
+            <br>
+            <p>La convención de usar colores se origina de la coloración de países de un mapa, donde cada cara es literalmente coloreada. Esto fue generalizado a la coloración de caras de grafos inmersos en el plano. En representaciones matemáticas y computacionales se utilizan típicamente enteros no negativos como colores. En general se puede usar un conjunto finito como conjunto de colores. La naturaleza del problema de coloración depende del número de colores pero no sobre cuales son.</p>
+            <br>
+            <h3>Historia</h3>
+            <br>
+            <p>Los primeros resultados sobre coloración de grafos trataban exclusivamente sobre grafos planares en forma de coloración de mapas. Mientras intentaba colorear un mapa de Inglaterra, Francis Guthrie postuló la conjetura de los 4 colores, notando que 4 colores son suficientes para colorear el mapa tal que regiones que comparten un borde común no reciban el mismo color. El hermano de Guthrie pasa el problema a su profesor de matemáticas Augustus de Morgan en la universidad, mencionado en una carta a William Hamilton en 1852. Arthur Cayley envía el problema a la London Mathematical Society en 1879. algunos años después, Alfred Kempe publicó un paper que resolvía el problema y por una década el problema de los 4 colores se consideró resuelto. Por su contribución Kempe fue elegido Fellow de la Royal Society y posteriormente presidente de la London Mathematical Society.</p>
+            <br>
+            <h3>Definiciones y Terminologia</h3>
+            <br>
+            <p>Vértice coloración: La vértice coloración (o simplemente coloración) es la asignación de los vértices de un grafo con colores tal que dos vértices que compartan la misma arista tengan colores diferentes. Un grafo con bucles no puede ser coloreado, y solo se consideran grafos simples.</p>
+            <br>
+            <p>La terminología de usar colores para etiquetar vértices proviene del problema de colorear mapas. Las etiquetas como rojo o azul son solamente utilizadas cuando el número de colores es pequeño, y normalmente los colores están representados por los enteros {1, 2, 3, …}.</p>
+            <br>
+            <p>Una coloración que usa a lo más k colores se llama k-coloración (propia). El menor número de colores necesarios para colorear un grafo G se llama número cromático y se denota como χ(G). Un grafo que puede ser asignada una k-coloración (propia) es k-coloreable y es k-cromático si su número cromático es exactamente k. Un subconjunto de vértices asignados con el mismo color se llama una clase de color. Cada clase forma un conjunto independiente. Esto es, una k-coloración es lo mismo que una partición del conjunto de vértices en k conjuntos independientes, y los términos k-partito y k-coloreable tienen el mismo significado.</p>
+            <br>
+            <p>El polinomio cromático cuenta el número de maneras en las cuales puede ser coloreado un grafo usando no más que un número de colores dado. Por ejemplo, usando 3 colores, el grafo en la imagen de la derecha puede ser coloreado de 12 formas distintas. Con solo 2 colores, no puede ser coloreado. Con 4 colores, puede ser coloreado de 24+4*12 maneras distintas: usando los cuatro colores juntos, hay 4!= 24 coloraciones válidas (toda asignación de cuatro colores a algún grafo de cuatro vértices es una coloración propia); y para cada elección de tres de los cuatro colores, hay 12 3-coloraciones válidas</p>
+            <br>
+            <center>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Graph_with_all_three-colourings.svg" width="250">
+            </center>
+            <br>
+            <h3>Algoritmos que solucionan el coloreado de grafos</h3>
+            <br>
+            <p>* Algoritmo Secuencial o Voraz</p>
+            <br>
+            <p>* Algoritmo de coloración Welsh- Powell</p>
+            <br>
+            <p>* Algoritmo de coloración Matula-Marble-Isaccson</p>
+            <br>
+            <h3>Codigo en C++ de ejemplo</h3>
+            <br>
+            <pre>
+                #include < iostream>
+                    #include < vector>
+                    #include < queue>
+                    
+                    using namespace std;
+                    
+                    const int MAXN = 1005;
+                    
+                    int n, m;
+                    vector<int> adj[MAXN];
+                    int color[MAXN];
+                    
+                    bool isBipartite() {
+                      queue< int> q;
+                      for (int i = 1; i <= n; i++) {
+                        if (color[i] == 0) {
+                          q.push(i);
+                          color[i] = 1;
+                        }
+                        while (!q.empty()) {
+                          int u = q.front();
+                          q.pop();
+                          for (int v : adj[u]) {
+                            if (color[v] == 0) {
+                              color[v] = -color[u];
+                              q.push(v);
+                            } else if (color[v] == color[u]) {
+                              return false;
+                            }
+                          }
+                        }
+                      }
+                      return true;
+                    }
+                    
+                    int main() {
+                      cin >> n >> m;
+                      for (int i = 0; i < m; i++) {
+                        int u, v;
+                        cin >> u >> v;
+                        adj[u].push_back(v);
+                        adj[v].push_back(u);
+                      }
+                      if (isBipartite()) {
+                        cout << "El grafo es bipartito." << endl;
+                      } else {
+                        cout << "El grafo no es bipartito." << endl;
+                      }
+                      return 0;
+                    }
+            </pre>
+            <br>
+            <center>
+                <img src="https://i.ytimg.com/vi/R_X94Hih-dU/sddefault.jpg" width="450">
+            </center>
+            <br>
+
+            <p>Link de apoyo</p>
+            <br>
+            <li><a href="https://www.tdx.cat/bitstream/handle/10803/5844/01Fjog01de01.pdf?sequence=1">Contribucion al coloreado de grafos y las redes pequeño-mundo</a></li>
+            <br>
+            <li><a href="https://repositorio.unican.es/xmlui/bitstream/handle/10902/3099/Maria%20Rosa%20Murga%20Diaz.pdf?sequence=4">Coloracion de Grafos</a></li>
+            <br>           
+            <li><a href="http://eamo.usc.es/pub/mte/descargas/ProyectosFinMaster/Proyecto_1463.pdf">El Problema de Coloracion de Grafos</a></li>
+        </div>
+    </section>
+</body>
+</html>

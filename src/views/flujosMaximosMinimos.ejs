@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        <div class="derecha">
+            <center><h3>Flujos Máximos y Mínimos</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <br>
+            <h3>Flujo Maximo</h3>
+            <br>
+            <p> Generalmente  existen varios   flujos   con   el   mismo   valor máximo.   Para   encontrar   el   flujo   máximo consideraremos un flujo inicial en cada arista iguala cero, después se determina un  camino específico   de   la fuente   al   sumidero   y   se   incrementa   el   flujo.</p>
+            <br>
+            <p>* Las capacidades deben representar la máxima cantidad de flujo que pueden pasar por los diferentes arcos de la red.</p>
+            <br>
+            <p>* Si no existe límite de capacidad entre un nodo “A” y un nodo “B” entonces, se debe asignar una capacidad X muy grande.</p>
+            <br>
+            <h3>Flujo Minimo</h3>
+            <br>
+            <p>En lo que respecta a las redes, un corte es un conjunto de corte en el cual quedando partes disjuntas del conjunto de vértices, V1 y V2 que, situados en la red, dejan la fuente en una de ellas y al sumidero en la otra. Se llama capacidad de un corte a la suma: Capacidad (v,w) ; vV1, w?V2 V1es la parte que contiene a la fuente V2 es la parte que contiene al sumidero Sea F un flujo en G y sea (P, P) un corte en G. Entonces la capacidad de (p, p) es mayor o igual que el valor de F.</p>
+            <br>
+            <center>
+                <img src="https://sites.google.com/site/joselsanchezvaldez/_/rsrc/1464580227929/6-5-redes-teorema-de-flujo-maximo-teorema-de-flujo-minimo-pareos-y-redes-de-petri/flujo%20maximo.jpg" width="600">
+            </center>
+            <br>
+            <h3>Redes de Pareo</h3>
+            <br>
+            <p>Dado un grafo, un pareo es un subconjunto de aristas los cuales no tiene vértices en común.</p>
+            <br>
+            <center>
+                <img src="https://sites.google.com/site/joselsanchezvaldez/_/rsrc/1464582055363/6-5-redes-teorema-de-flujo-maximo-teorema-de-flujo-minimo-pareos-y-redes-de-petri/pareos.png?height=151&width=320" width="600">
+            </center>
+            <br>
+            <h3>Redes de Preti</h3>
+            <br>
+            <p>Es  un  grafo  dirigido  bipartito,  con  un  estado  inicial, llamado marcación inicial. Los dos componentes principales de la red de Petrí son los sitios (también  conocidos  como estados)  y  las transiciones.  Gráficamente, los sitios  son  dibujados como  círculos  y  las  transiciones  como  barras  o rectángulos. Las aristas del grafo son conocidas como arcos. Estos tienen un peso específico, el  cual  es  indicado  por  un  número  entero  positivo,  y  van de  sitio  a  transición  y viceversa.</p>
+            <br>
+            <center>
+                <img src="https://sites.google.com/site/joselsanchezvaldez/_/rsrc/1464581948480/6-5-redes-teorema-de-flujo-maximo-teorema-de-flujo-minimo-pareos-y-redes-de-petri/redes%20de%20petri.GIF?height=320&width=239" width="300">
+            </center>
+            <br>
+
+            <p>Link de apoyo</p>
+            <br>
+            <li><a href="http://dis.um.es/~ginesgm/files/doc/aed/sec5.6.3-5.8.pdf">Flujo maximo en redes</a></li>
+            <br>
+            <li><a href="https://www.estadistica.net/IO/Practica-Ford-Fulkerson.pdf">ALGORITMO DE FORD-FULKERSON</a></li>
+            <br>           
+            <li><a href="https://repositorio.uniandes.edu.co/bitstream/handle/1992/15081/u618060.pdf?sequence=1">Flujo maximo y corte minimo sobre CUDA</a></li>
+        </div>
+    </section>
+</body>
+</html>

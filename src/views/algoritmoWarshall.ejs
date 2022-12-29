@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="img/iconoA.png"> 
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+   
+    <title>Inicio</title>
+</head>
+<body>
+    <%- include("partials/header") %>
+    
+    <section id="pantalla-dividida">
+        <%- include("partials/izquierda") %>
+
+        
+        <div class="derecha">
+            <center><h3>Algortimo de Warshall</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
+            <h3>Historia</h3>
+            <br>
+            <p>Stephen Warshall (15 noviembre 1935 a 11 diciembre 2006) nació en la ciudad de Nueva York . Durante su carrera, Warshall llevó a cabo la investigación y el desarrollo en los sistemas operativos , el diseño de compiladores , el diseño del lenguaje , y la investigación de operaciones . Warshall murió el 11 de diciembre de 2006, de cáncer en su casa de Gloucester, Massachusetts . Le sobreviven su esposa, Sarah Dunlap, y sus dos hijos, Andrew D. Warshall y Sophia VZ Warshall. Después de graduarse de Harvard, Warshall trabajó en ORO (Operation Research Office), un programa establecido por Johns Hopkins para realizar investigación y desarrollo para el Ejército de los Estados Unidos. En 1958, dejó ORO para ocupar un puesto en una empresa llamada Technical Operations, donde ayudó a construir un laboratorio de investigación y desarrollo para proyectos de software militar.
+                En 1961, dejó Technical Operations para fundar Massachusetts Computer Associates. Posteriormente, esta empresa pasó a formar parte de Applied Data Research (ADR). Después de la fusión, Warshall formó parte de la junta directiva de ADR y administró una variedad de proyectos y organizaciones.
+                Se retiró de ADR en 1982 y enseñó una clase semanal de hebreo bíblico en Temple Ahavat Achim en Gloucester, Massachusetts.</p>
+            <br>
+            <center>
+              <img src="https://static.wixstatic.com/media/eade1a_5b62ced49d0c4456a1fe03777cc64436~mv2.jpg/v1/fill/w_350,h_411,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/eade1a_5b62ced49d0c4456a1fe03777cc64436~mv2.jpg"  width="250">
+            </center>
+            <br>
+            <h3>Cierre Transitivo</h3>
+            <br>
+            <p>Cierre transitivo de una relación binaria es encontrar la relación binaria más pequeña, que siendo esta transitiva contiene al conjunto de pares de la relación binaria original.</p>
+            <br>
+            <center>
+                <img src="https://static.wixstatic.com/media/eade1a_2b076051c87d41eda4c24143b8258df5~mv2.jpg/v1/fill/w_532,h_542,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/eade1a_2b076051c87d41eda4c24143b8258df5~mv2.jpg"  width="300">
+            </center>
+            <br>
+            <h3>Caracteristicas del algoritmo</h3>
+            <br>
+            <p>Es una representación de algoritmo Booleano. Encuentra si posible un camino entre cada uno de los vértices de la gráfica dirigida. Es decir no presenta las distancia entre los vértices Se basa en un concepto llamado cerradura transitiva de la matriz de adyacencia El algoritmo de Warshall sirve para encontrar la cerradura transitiva de una relación binaria en el conjunto A. La clausura transitiva de una relación binaria es la relación binaria mas pequeña que siendo transitiva contenga el conjunto de pares de la relación binaria original.</p>
+            <br>
+            <h3>Como funciona</h3>
+            <br>
+            <p>Existe una matriz inicial P0</p>
+            <p>Indica si hay o no camino DIRECTO de Vi a Vj</p>
+            <p>La matriz que le sigue P1</p>
+            <p>Indicaría si hay o no camino DIRECTO (Esto ya lo sabe P0)</p>
+            <p>O pasando por V0 (añade este vértice al análisis)</p>
+            <p>P2</p>
+            <p>Indicaría si hay camino DIRECTO </p>
+            <p>o pasando por V0 (Esto ya lo sabe P1)</p>
+            <p>O pasando por V1</p>
+            <p>P3</p>
+            <p>Indicaría si hay camino DIRECTO o pasando por V0, o V1 (Lo sabe P2)</p>
+            <p>O pasando por V2</p>
+            <p>Pk</p>
+            <p>Indicaría lo que ya sabe Pk-1</p>
+            <p>O pasando por Vk-1</p>
+            <br>
+            <center>
+                <img src="https://static.wixstatic.com/media/eade1a_a0c3530f6daa4e8aac61cd272b9ffb9d~mv2.jpg/v1/fill/w_532,h_331,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/eade1a_a0c3530f6daa4e8aac61cd272b9ffb9d~mv2.jpg"  width="500">
+            </center>
+            <br>
+            <h3>Implementacion en C++</h3>
+            <br>
+            <pre>
+                
+                #include < iostream > 
+                using namespace std;
+
+                // defining the number of vertices
+                #define nV 4
+
+                #define INF 999
+
+                void printMatrix(int matrix[][nV]);
+
+                void floydWarshall(int graph[][nV]) {
+                int matrix[nV][nV], i, j, k;
+
+                for (i = 0; i < nV; i++)
+                    for (j = 0; j < nV; j++)
+                    matrix[i][j] = graph[i][j];
+
+                for (k = 0; k < nV; k++) {
+                    for (i = 0; i < nV; i++) {
+                    for (j = 0; j < nV; j++) {
+                        if (matrix[i][k] + matrix[k][j] < matrix[i][j])
+                        matrix[i][j] = matrix[i][k] + matrix[k][j];
+                    }
+                    }
+                }
+                printMatrix(matrix);
+                }
+
+                void printMatrix(int matrix[][nV]) {
+                for (int i = 0; i < nV; i++) {
+                    for (int j = 0; j < nV; j++) {
+                    if (matrix[i][j] == INF)
+                        printf("%4s", "INF");
+                    else
+                        printf("%4d", matrix[i][j]);
+                    }
+                    printf("\n");
+                }
+                }
+
+                int main() {
+                int graph[nV][nV] = {{0, 3, INF, 5},
+                            {2, 0, INF, 4},
+                            {INF, 1, 0, INF},
+                            {INF, INF, 2, 0}};
+                floydWarshall(graph);
+                }
+            </pre>
+            <p>Link de apoyo</p>
+            <br>
+            <li><a href="https://www.javatpoint.com/warshalls-algorithm">Warshall's Algorithm</a></li>
+            <br>
+            <li><a href="https://www.programiz.com/dsa/floyd-warshall-algorithm">Implementación de Algoritmo de Warshall en C++</a></li>  
+            <br>         
+            <li><a href="https://en.wikipedia.org/wiki/Stephen_Warshall">Historia de Stephen Warshall</a></li>
+        </div>
+    </section>
+</body>
+</html>
