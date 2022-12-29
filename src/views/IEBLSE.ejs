@@ -1,35 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" href="img/iconoA.png"> 
-    <link rel="stylesheet" href="css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
-   
+  <head>
+    <%- include("partials/meta") %>
+
     <title>Inicio</title>
-</head>
-<body>
+  </head>
+  <body>
     <%- include("partials/header") %>
-    
+
     <section id="pantalla-dividida">
-        <%- include("partials/izquierda") %>
+      <%- include("partials/izquierda") %>
 
-        
-        <div class="derecha">
-            <center><h3>Estructura y diseño de una LSE</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
-            <br>
-            <p>Una lista simplemente enlazada es una de las estructuras de datos fundamentales, y puede ser usada para implementar otras estructuras de datos. Consiste en una secuencia de nodos, en los que se guardan campos de datos arbitrarios y una o dos referencias (punteros) al nodo anterior o posterior. El principal beneficio de las listas enlazadas respecto a los array convencionales es que el orden de los elementos enlazados puede ser diferente al orden de almacenamiento en la memoria o el disco, permitiendo que el orden de recorrido de la lista sea diferente al de almacenamiento.</p>
+      <div class="derecha">
+        <div class="borde">
+          <center>
+            <h3>Operaciones Insertar, Eliminar y Buscar en LSE</h3>
+          </center>
+          <!--Ponen el titulo del tema y abajo el contenido-->
+          <br />
+          <p>
+            Estos métodos son los mas básicos que podemos crear a partir de la
+            “lógica del puntero”, y la implementación de otros métodos basados
+            en la misma idea queda a gusto (o necesidad) del programador. Por
+            ejemplo, podríamos crear métodos que filtren la lista según una
+            característica de los clientes (como discriminar entre los clientes
+            frecuentes y los no frecuentes), o un método que traspase los datos
+            de los clientes a un archivo de texto para guardarlos, y otro que
+            sea capaz de leer este archivo y llenar una lista con los datos
+            guardados. En fin, hay infinitas posibilidades.
+          </p>
 
-            
-            <p>Link de apoyo</p>
-            <li><a href="https://blog.martincruz.me/2012/10/listas-enlazadas-simples-en-c.html">Implementación en C++</a></li>
-            <li><a href="https://www.techiedelight.com/es/linked-list-implementation-cpp/">Implementación de listas enlazadas en C++</a></li>            
-            <li><a href="http://programacionparacoccidio.blogspot.com/2013/01/listas-enlazadas-en-c-orientado-objetos.html">Listas Enlazadas en C++ Orientado a Objetos</a></li>
+          <h5>Insertar:</h5>
+          <p>
+            Para añadir un nodo a la lista, primero creamos un nodo, al que
+            llamaremos nodo, que contenga un número por el argumento, al que
+            llamaremos nro. Luego conectamos un nodo con el último nodo de la
+            lista. Para referirnos a éste, creamos un puntero al primer nodo y
+            avanzamos hasta el último.
+          </p>
+          <p>
+            Ahora que el puntero apunta al último nodo de la lista, haremos que
+            el siguiente nodo al que apunte este último de la lista tome el
+            valor de nuetro nodo a insertar. El proceso para añadir un nodo al
+            principio de la lista es muy parecido e incluso más fácil.
+          </p>
+
+          <h5>Eliminar:</h5>
+          <p>
+            Para eliminar un nodo X, hay que almacenar en un puntero la
+            ubicación del nodo anterior a este, para luego hacer que apunte al
+            siguiente nodo de X, sacándolo de la lista.
+          </p>
+
+          <h5>Buscar:</h5>
+          <p>
+            Para buscar un nodo tenemos que recorrer la lista, a traves de un
+            puntero, e ir comparando uno a uno los nodos con el valor de la
+            busqueda y retornar su ubicación de ser encontrado.
+          </p>
+
+          <h5>Implementación de estas operaciones:</h5>
+
+          <div class="panel-body">
+            <pre>
+                    <ol>
+                        <li>#include &lt;iostream&gt;</li>
+                        <li>#include &lt;stdlib.h&gt;</li>
+                        <li>using namespace std;</li>
+                        <li> </li>
+                        <li>struct nodo{</li>
+                        <li>       int nro;        // en este caso es un numero entero</li>
+                        <li>       struct nodo *sgte;</li>
+                        <li>};</li>
+                        <li> </li>
+                        <li>typedef struct nodo *Tlista;</li>
+                        <li> </li>
+                        <li>void insertarInicio(Tlista &lista, int valor)</li>
+                        <li>{</li>
+                        <li>    Tlista q;</li>
+                        <li>    q = new(struct nodo);</li>
+                        <li>    q-&gt;nro = valor;</li>
+                        <li>    q-&gt;sgte = lista;</li>
+                        <li>    lista  = q;</li>
+                        <li>}</li>
+                        <li> </li>
+                        <li>void insertarFinal(Tlista &lista, int valor)</li>
+                        <li>{</li>
+                        <li>    Tlista t, q = new(struct nodo);</li>
+                        <li> </li>
+                        <li>    q-&gt;nro  = valor;</li>
+                        <li>    q-&gt;sgte = NULL;</li>
+                        <li> </li>
+                        <li>    if(lista==NULL)</li>
+                        <li>    {</li>
+                        <li>        lista = q;</li>
+                        <li>    }</li>
+                        <li>    else</li>
+                        <li>    {</li>
+                        <li>        t = lista;</li>
+                        <li>        while(t-&gt;sgte!=NULL)</li>
+                        <li>        {</li>
+                        <li>            t = t-&gt;sgte;</li>
+                        <li>        }</li>
+                        <li>        t-&gt;sgte = q;</li>
+                        <li>    }</li>
+                        <li> </li>
+                        <li>}</li>
+                        <li> </li>
+                        <li>int insertarAntesDespues()</li>
+                        <li>{</li>
+                        <li>    int _op, band;</li>
+                        <li>    cout&lt;&lt;endl;</li>
+                        <li>    cout&lt;&lt;"\t 1. Antes de la posicion           "&lt;&lt;endl;</li>
+                        <li>    cout&lt;&lt;"\t 2. Despues de la posicion         "&lt;&lt;endl;</li>
+                        <li> </li>
+                        <li>    cout&lt;&lt;"\n\t Opcion : "; cin&gt;&gt; _op;</li>
+                        <li> </li>
+                        <li>    if(_op==1)</li>
+                        <li>        band = -1;</li>
+                        <li>    else</li>
+                        <li>        band = 0;</li>
+                        <li> </li>
+                        <li>    return band;</li>
+                        <li>}</li>
+                        <li> </li>
+                        <li>void insertarElemento(Tlista &lista, int valor, int pos)</li>
+                        <li>{</li>
+                        <li>    Tlista q, t;</li>
+                        <li>    int i;</li>
+                        <li>    q = new(struct nodo);</li>
+                        <li>    q-&gt;nro = valor;</li>
+                        <li> </li>
+                        <li>    if(pos==1)</li>
+                        <li>    {</li>
+                        <li>        q-&gt;sgte = lista;</li>
+                        <li>        lista = q;</li>
+                        <li>    }</li>
+                        <li>    else</li>
+                        <li>    {</li>
+                        <li>        int x = insertarAntesDespues();</li>
+                        <li>        t = lista;</li>
+                        <li> </li>
+                        <li>        for(i=1; t!=NULL; i++)</li>
+                        <li>        {</li>
+                        <li>            if(i==pos+x)</li>
+                        <li>            {</li>
+                        <li>                q-&gt;sgte = t-&gt;sgte;</li>
+                        <li>                t-&gt;sgte = q;</li>
+                        <li>                return;</li>
+                        <li>            }</li>
+                        <li>            t = t-&gt;sgte;</li>
+                        <li>        }</li>
+                        <li>    }</li>
+                        <li>    cout&lt;&lt;"   Error...Posicion no encontrada..!"&lt;&lt;endl;</li>
+                        <li>}</li>
+                        <li> </li>
+                        <li>void buscarElemento(Tlista lista, int valor)</li>
+                        <li>{</li>
+                        <li>    Tlista q = lista;</li>
+                        <li>    int i = 1, band = 0;</li>
+                        <li> </li>
+                        <li>    while(q!=NULL)</li>
+                        <li>    {</li>
+                        <li>        if(q-&gt;nro==valor)</li>
+                        <li>        {</li>
+                        <li>            cout&lt;&lt;endl&lt;&lt;" Encontrada en posicion "&lt;&lt; i &lt;&lt;endl;</li>
+                        <li>            band = 1;</li>
+                        <li>        }</li>
+                        <li>        q = q-&gt;sgte;</li>
+                        <li>        i++;</li>
+                        <li>    }</li>
+                        <li> </li>
+                        <li>    if(band==0)</li>
+                        <li>        cout&lt;&lt;"\n\n Numero no encontrado..!"&lt;&lt; endl;</li>
+                        <li>}</li>
+                        <li> </li>
+                        <li>void reportarLista(Tlista lista)</li>
+                        <li>{</li>
+                        <li>     int i = 0;</li>
+                        <li> </li>
+                        <li>     while(lista != NULL)</li>
+                        <li>     {</li>
+                        <li>          cout &lt;&lt;' '&lt;&lt; i+1 &lt;&lt;") " &lt;&lt; lista-&gt;nro &lt;&lt; endl;</li>
+                        <li>          lista = lista-&gt;sgte;</li>
+                        <li>          i++;</li>
+                        <li>     }</li>
+                        <li>}</li>
+                        <li> </li>
+                        <li> </li>
+                        <li>void eliminarElemento(Tlista &lista, int valor)</li>
+                        <li>{</li>
+                        <li>    Tlista p, ant;</li>
+                        <li>    p = lista;</li>
+                        <li> </li>
+                        <li>    if(lista!=NULL)</li>
+                        <li>    {</li>
+                        <li>        while(p!=NULL)</li>
+                        <li>        {</li>
+                        <li>            if(p-&gt;nro==valor)</li>
+                        <li>            {</li>
+                        <li>                if(p==lista)</li>
+                        <li>                    lista = lista-&gt;sgte;</li>
+                        <li>                else</li>
+                        <li>                    ant-&gt;sgte = p-&gt;sgte;</li>
+                        <li> </li>
+                        <li>                delete(p);</li>
+                        <li>                return;</li>
+                        <li>            }</li>
+                        <li>            ant = p;</li>
+                        <li>            p = p-&gt;sgte;</li>
+                        <li>        }</li>
+                        <li>    }</li>
+                        <li>    else</li>
+                        <li>        cout&lt;&lt;" Lista vacia..!";</li>
+                        <li>}</li>
+                        <li> </li>
+                        <li>void eliminaRepetidos(Tlista &lista, int valor)</li>
+                        <li>{</li>
+                        <li>    Tlista q, ant;</li>
+                        <li>    q = lista;</li>
+                        <li>    ant = lista;</li>
+                        <li> </li>
+                        <li>    while(q!=NULL)</li>
+                        <li>    {</li>
+                        <li>        if(q-&gt;nro==valor)</li>
+                        <li>        {</li>
+                        <li>            if(q==lista) // primero elemento</li>
+                        <li>            {</li>
+                        <li>                lista = lista-&gt;sgte;</li>
+                        <li>                delete(q);</li>
+                        <li>                q = lista;</li>
+                        <li>            }</li>
+                        <li>            else</li>
+                        <li>            {</li>
+                        <li>                ant-&gt;sgte = q-&gt;sgte;</li>
+                        <li>                delete(q);</li>
+                        <li>                q = ant-&gt;sgte;</li>
+                        <li>            }</li>
+                        <li>        }</li>
+                        <li>        else</li>
+                        <li>        {</li>
+                        <li>            ant = q;</li>
+                        <li>            q = q-&gt;sgte;</li>
+                        <li>        }</li>
+                        <li> </li>
+                        <li>    }// fin del while</li>
+                        <li>   </li>
+                        <li>    cout&lt;&lt;"\n\n Valores eliminados..!"&lt;&lt;endl;</li>
+                        <li>}</li>
+                        <li> </li>
+                        <li>void menu1()</li>
+                        <li>{</li>
+                        <li>    cout&lt;&lt;"\n\t\tLISTA ENLAZADA SIMPLE\n\n";</li>
+                        <li>    cout&lt;&lt;" 1. INSERTAR AL INICIO               "&lt;&lt;endl;</li>
+                        <li>    cout&lt;&lt;" 2. INSERTAR AL FINAL                "&lt;&lt;endl;</li>
+                        <li>    cout&lt;&lt;" 3. INSERTAR EN UNA POSICION         "&lt;&lt;endl;</li>
+                        <li>    cout&lt;&lt;" 4. REPORTAR LISTA                   "&lt;&lt;endl;</li>
+                        <li>    cout&lt;&lt;" 5. BUSCAR ELEMENTO                  "&lt;&lt;endl;</li>
+                        <li>    cout&lt;&lt;" 6. ELIMINAR ELEMENTO 'V'            "&lt;&lt;endl;</li>
+                        <li>    cout&lt;&lt;" 7. ELIMINAR ELEMENTOS CON VALOR 'V' "&lt;&lt;endl;</li>
+                        <li>    cout&lt;&lt;" 8. SALIR                            "&lt;&lt;endl;</li>
+                        <li> </li>
+                        <li>    cout&lt;&lt;"\n INGRESE OPCION: ";</li>
+                        <li>}</li>
+                        <li> </li>
+                        <li> </li>
+                        <li>/*                        Funcion Principal</li>
+                        <li>---------------------------------------------------------------------*/</li>
+                        <li> </li>
+                        <li>int main()</li>
+                        <li>{</li>
+                        <li>    Tlista lista = NULL;</li>
+                        <li>    int op;     // opcion del menu</li>
+                        <li>    int _dato;  // elemenento a ingresar</li>
+                        <li>    int pos;    // posicion a insertar</li>
+                        <li> </li>
+                        <li> </li>
+                        <li>    system("color 0b");</li>
+                        <li> </li>
+                        <li>    do</li>
+                        <li>    {</li>
+                        <li>        menu1();  cin&gt;&gt; op;</li>
+                        <li> </li>
+                        <li>        switch(op)</li>
+                        <li>        {</li>
+                        <li>            case 1:</li>
+                        <li> </li>
+                        <li>                 cout&lt;&lt; "\n NUMERO A INSERTAR: "; cin&gt;&gt; _dato;</li>
+                        <li>                 insertarInicio(lista, _dato);</li>
+                        <li>            break;</li>
+                        <li> </li>
+                        <li> </li>
+                        <li>            case 2:</li>
+                        <li> </li>
+                        <li>                 cout&lt;&lt; "\n NUMERO A INSERTAR: "; cin&gt;&gt; _dato;</li>
+                        <li>                 insertarFinal(lista, _dato );</li>
+                        <li>            break;</li>
+                        <li> </li>
+                        <li> </li>
+                        <li>            case 3:</li>
+                        <li> </li>
+                        <li>                 cout&lt;&lt; "\n NUMERO A INSERTAR: ";cin&gt;&gt; _dato;</li>
+                        <li>                 cout&lt;&lt; " Posicion : ";       cin&gt;&gt; pos;</li>
+                        <li>                 insertarElemento(lista, _dato, pos);</li>
+                        <li>            break;</li>
+                        <li> </li>
+                        <li> </li>
+                        <li>            case 4:</li>
+                        <li> </li>
+                        <li>                 cout &lt;&lt; "\n\n MOSTRANDO LISTA\n\n";</li>
+                        <li>                 reportarLista(lista);</li>
+                        <li>            break;</li>
+                        <li> </li>
+                        <li> </li>
+                        <li>            case 5:</li>
+                        <li> </li>
+                        <li>                 cout&lt;&lt;"\n Valor a buscar: "; cin&gt;&gt; _dato;</li>
+                        <li>                 buscarElemento(lista, _dato);</li>
+                        <li>            break;</li>
+                        <li> </li>
+                        <li>            case 6:</li>
+                        <li> </li>
+                        <li>                cout&lt;&lt;"\n Valor a eliminar: "; cin&gt;&gt; _dato;</li>
+                        <li> </li>
+                        <li>                eliminarElemento(lista, _dato);</li>
+                        <li>            break;</li>
+                        <li> </li>
+                        <li>            case 7:</li>
+                        <li> </li>
+                        <li>                cout&lt;&lt;"\n Valor repetido a eliminar: "; cin&gt;&gt; _dato;</li>
+                        <li> </li>
+                        <li>                eliminaRepetidos(lista, _dato);</li>
+                        <li>            break;</li>
+                        <li> </li>
+                        <li>                    }</li>
+                        <li> </li>
+                        <li>        cout&lt;&lt;endl&lt;&lt;endl;</li>
+                        <li>        system("pause");  system("cls");</li>
+                        <li> </li>
+                        <li>    }while(op!=8);</li>
+                        <li> </li>
+                        <li> </li>
+                        <li>   system("pause");</li>
+                        <li>   return 0;</li>
+                        <li>}</li>                          
+                    </ol>
+                </pre>
+          </div>
+
+          <p>Links de apoyo</p>
+          <li>
+            <a
+              href="https://sites.google.com/site/edatosubo/4-estructura-de-datos-dinamicas/1-listas/1-lista-enlazada-simple-o-lista-simplemente-enlazada/2-operaciones-sobre-una-lista"
+              >Operaciones sobre una Lista</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://blog.martincruz.me/2012/10/listas-enlazadas-simples-en-c.html"
+              >Listas Enlazadas Simples Lineales en C++</a
+            >
+          </li>
         </div>
+        <br />
+        <div class="siguiente">
+          <p>Siguiente tema:</p>
+          <a href="\estructLDE">Estructura y diseño de una LDE >></a>
+        </div>
+      </div>
     </section>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

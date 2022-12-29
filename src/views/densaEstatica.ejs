@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" href="img/iconoA.png"> 
-    <link rel="stylesheet" href="css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Belgrano&display=swap" rel="stylesheet">
+    
+    
+    <%- include("partials/meta") %>
    
     <title>Inicio</title>
 </head>
@@ -20,6 +15,7 @@
 
         
         <div class="derecha">
+            <div class="borde">
             <center><h3>Matrices poco densas Estáticas</h3></center> <!--Ponen el titulo del tema y abajo el contenido-->
             <br>
             <p>Las matrices poco densas son aquellas en las que la mayoría de los elementos son cero. Es decir, hay pocas entradas no nulas en la matriz en comparación con el número total de entradas. Las matrices poco densas son comunes en aplicaciones en las que se representan grafos o redes, ya que muchos grafos tienen un número mucho mayor de vértices que de aristas.</p>
@@ -29,7 +25,6 @@
             <p>Para matrices poco densas estáticas, una forma eficiente de representarlas es mediante una matriz de adyacencia, en la que cada entrada representa una arista en el grafo. Esto permite un acceso rápido a cualquier entrada de la matriz mediante índices y es adecuado para grafos de tamaño mediano o pequeño. Sin embargo, para grafos muy grandes o con muchas aristas, puede ser más eficiente utilizar otras estructuras de datos, como listas de adyacencia.</p>
             <br>
             <p>A continuacion el codigo para c++:</p>
-            <br>
             <div class="panel-body">
                 <pre>
                     <ol>
@@ -101,12 +96,13 @@
                 </pre>    
             </div>
             
-            <br>
             <p>Link de apoyo</p>
             <li><a href="https://tareasuniversitarias.com/matriz-poco-densa-regular.html">Matriz poco densa regular</a></li>
             <li><a href="http://metodosdeprogra1.blogspot.com/2012/09/22-matrices-poco-densas.html">MATRICES POCO DENSAS - Metodos de Programación</a></li>            
             <li><a href="http://metodos1utec.blogspot.com/2012/10/matricespoco-densas-y-matrices.html">MATRICES POCO DENSAS</a></li>
         </div>
+    </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>
